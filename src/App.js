@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import options from './options.json'
 
-function App() {
-  return (
-    <div className="App">
-      <div className="App-container">
-        <UnitList
-          names={options.unitNames}
-        />
-        <Editor
-          properties={options.unitProperties}
-        />
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      options: {
+        unitNames: ["Infantry"],
+        unitProperties: [],
+        coNames: []
+      }
+    };
+
+    fetch('../data/options.json').then(response => {
+      console.log(response);
+      return response.json();
+    }).then(data => {
+      // Work with JSON data here
+      console.log(data);
+      this.setState(() => ({
+        options: data
+      }));
+    }).catch(err => {
+      // Do something for an error here
+      console.log("Error Reading data " + err);
+    });
+
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="App-container">
+          <UnitList
+            names={this.state.options.unitNames}
+          />
+          <Editor
+            properties={this.state.options.unitProperties}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 function UnitList(props) {
