@@ -1,0 +1,60 @@
+{
+	"unitNames": [
+		"Armored car",
+		"Artillery",
+		"Bazooka",
+		"Cavalry",
+		"Grenade Thrower",
+		"Infantry",
+		"Machine Gunner",
+		"Tank",
+		"Transport",
+		"Bomber"
+	],
+	"unitProperties": [
+		{
+			"name": "vision",
+			"type": ""
+		},
+		{
+			"name": "movement",
+			"type": ""
+		},
+		{
+			"name": "movementType",
+			"type": ""
+		},
+		{
+			"name": "baseDefence",
+			"type": ""
+		},
+		{
+			"name": "armorType",
+			"type": ""
+		},
+		{
+			"name": "lAttack",
+			"type": ""
+		},
+		{
+			"name": "mAttack",
+			"type": ""
+		},
+		{
+			"name": "hAttack",
+			"type": ""
+		},
+		{
+			"name": "uAttack",
+			"type": ""
+		},
+		{
+			"name": "ammo",
+			"type": ""
+		}
+	],
+	"coNames": [
+		"Friedrich",
+		"JulyWolf"
+	]
+}
