@@ -57,3 +57,9 @@ li {
 .Editor-container-element {
   flex: 50%;
 }
+
+.Like-link {
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
