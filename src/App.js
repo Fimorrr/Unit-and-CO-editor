@@ -13,7 +13,8 @@ class App extends Component {
         coNames: []
       },
       units: {},
-      currentUnitName: "Infantry"
+      currentUnitName: "Infantry",
+      currentCOName: "Origin"
     };
 
     fetch('../data/options.json').then(response => {
@@ -22,6 +23,7 @@ class App extends Component {
       this.setState(() => ({
         options: data
       }));
+
       this.initJson();
     }).catch(err => {
       // Do something for an error here
@@ -34,12 +36,17 @@ class App extends Component {
 
   initJson = () => {
     this.state.options.unitNames.forEach((unitName) => {
-      this.setState(() => ({
-        units: {
-          ...this.state.units,
-          [unitName]: {}
-        }
-      }));
+      this.state.options.unitProperties.forEach((unitProperty) => {
+        this.setState(() => ({
+          units: {
+            ...this.state.units,
+            [unitName]: {
+              ...this.state.units[unitName],
+              [unitProperty.name]: ""
+            }
+          }
+        }));
+      });
     });
   }
 
@@ -51,7 +58,7 @@ class App extends Component {
       units: {
         ...this.state.units,
         [this.state.currentUnitName]: {
-          ...this.state.units.Infantry,
+          ...this.state.units[this.state.currentUnitName],
           [propertyName]: inputValue
         }
       }
@@ -64,10 +71,17 @@ class App extends Component {
     console.log("Json generated");
   }
 
-  changeUnitName = (unitName) => {
-    this.setState(() => ({
-      currentUnitName: unitName
-    }));
+  changeUnitName = (unitName, isUnit) => {
+    if (isUnit) {
+      this.setState(() => ({
+        currentUnitName: unitName
+      }));
+    }
+    else {
+      this.setState(() => ({
+        currentCOName: unitName
+      }));
+    }
   }
 
   render() {
@@ -76,11 +90,19 @@ class App extends Component {
         <div className="App-container">
           <UnitList
             names={this.state.options.unitNames}
+            isUnit={true}
+            changeUnitName={this.changeUnitName}
+          />
+          <UnitList
+            names={this.state.options.coNames}
+            isUnit={false}
             changeUnitName={this.changeUnitName}
           />
           <Editor
             unitName={this.state.currentUnitName}
+            coName={this.state.currentCOName}
             properties={this.state.options.unitProperties}
+            unit={this.state.units[this.state.currentUnitName]}
             changeJson={this.changeJson}
           />
         </div>
@@ -97,6 +119,7 @@ function UnitList(props) {
         {props.names.map((item, index) => (
           <ListElement
             name={item}
+            isUnit={props.isUnit}
             changeUnitName={props.changeUnitName}
           />
         ))}
@@ -106,10 +129,17 @@ function UnitList(props) {
 }
 
 function ListElement(props) {
-  let imgSrc = "../resources/units/" + props.name + ".png";
+  let imgSrc = "";
+
+  if (props.isUnit) {
+    imgSrc = "../resources/units/" + props.name + ".png";
+  }
+  else {
+    imgSrc = "../resources/co/" + props.name + ".png";
+  }
 
   return (
-    <li className="Like-link" onClick={() => props.changeUnitName(props.name)}>
+    <li className="Like-link" onClick={() => props.changeUnitName(props.name, props.isUnit)}>
       <img src={imgSrc} width="30px" height="30px"/>
       {props.name}
     </li>
@@ -117,16 +147,26 @@ function ListElement(props) {
 }
 
 function Editor(props) {
-  let imgSrc = "../resources/units/" + props.unitName + ".png";
+  let unitImgSrc = "../resources/units/" + props.unitName + ".png";
+  let coImgSrc = "../resources/co/" + props.coName + ".png";
 
   return (
-    <div className="App-container-block">
-      <div>{props.unitName}</div>
-      <img src={imgSrc} width="100px" height="100px"/>
+    <div className="App-container-block-editor">
+      <div className="Editor-header">
+        <div className="Editor-header-element">
+          <div>{props.unitName}</div>
+          <img src={unitImgSrc} width="100px" height="100px"/>
+        </div>
+        <div className="Editor-header-element">
+          <div>{props.coName}</div>
+          <img src={coImgSrc} width="100px" height="100px"/>
+        </div>
+      </div>
       <ul>
         {props.properties.map((item, index) => (
           <EditorElement
             name={item.name}
+            value={props.unit === undefined ? "" : props.unit[item.name]}
             changeJson={props.changeJson}
           />
         ))}
@@ -138,8 +178,8 @@ function Editor(props) {
 function EditorElement(props) {
   return (
     <li className="Editor-container">
-      <div class="Editor-container-element">{props.name}</div>
-      <input onChange={(event) => props.changeJson(event, props.name)} class="Editor-container-element"/>
+      <div className="Editor-container-element">{props.name}</div>
+      <input className="Editor-input" value={props.value} onChange={(event) => props.changeJson(event, props.name)}/>
     </li>
   );
 }

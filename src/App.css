@@ -42,11 +42,27 @@
 }
 
 .App-container-block {
+  flex: 25%;
+}
+
+.App-container-block-editor {
   flex: 50%;
+}
+
+ul {
+  padding: 0;
 }
 
 li {
   list-style-type: none; /* Убираем маркеры */
+}
+
+.Editor-header {
+  display: flex;
+}
+
+.Editor-header-element {
+  flex: 50%;
 }
 
 .Editor-container {
@@ -56,6 +72,10 @@ li {
 
 .Editor-container-element {
   flex: 50%;
+}
+
+.Editor-input {
+  width: 100px;
 }
 
 .Like-link {
