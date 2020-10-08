@@ -14,7 +14,8 @@ class App extends Component {
       },
       units: {},
       currentUnitName: "Infantry",
-      currentCOName: "Origin"
+      currentCOName: "Origin",
+      isJsonInit: false
     };
 
     fetch('../data/options.json').then(response => {
@@ -35,31 +36,70 @@ class App extends Component {
   }
 
   initJson = () => {
-    this.state.options.unitNames.forEach((unitName) => {
-      this.state.options.unitProperties.forEach((unitProperty) => {
-        this.setState(() => ({
-          units: {
-            ...this.state.units,
-            [unitName]: {
-              ...this.state.units[unitName],
-              [unitProperty.name]: ""
+    let {unitNames, unitProperties, coNames} = this.state.options;
+
+    coNames.forEach((coName) => {
+      this.setState(() => ({
+        units: {
+          ...this.state.units,
+          [coName]: {}
+        }
+      }));
+    });
+
+    coNames.forEach((coName) => {
+      unitNames.forEach((unitName) => {
+        unitProperties.forEach((unitProperty) => {
+          this.setState(() => ({
+            units: {
+              ...this.state.units,
+              [coName]: {
+                ...this.state.units[coName],
+                [unitName]: {
+                  ...this.state.units[coName][unitName],
+                  [unitProperty.name]: {
+                    value: "",
+                    hasValue: false
+                  }
+                }
+              }
             }
-          }
-        }));
+          }));
+        });
       });
     });
+
+    this.setState(() => ({
+      isJsonInit: true
+    }));
   }
 
-  changeJson = (event, propertyName) => {
-    console.log("Json changed: " + propertyName + ", " + event.target.value);
-    var inputValue = event.target.value;
+  changeJson = (event, propertyName, isProperty) => {
+    let fieldName = "value";
+
+    if (!isProperty) {
+      fieldName = "hasValue";
+    }
+
+    let inputType = event.target.type;
+    let inputValue = event.target.value;
+
+    if (inputType === "checkbox") {
+      inputValue = event.target.checked;
+    }
 
     this.setState(() => ({
       units: {
         ...this.state.units,
-        [this.state.currentUnitName]: {
-          ...this.state.units[this.state.currentUnitName],
-          [propertyName]: inputValue
+        [this.state.currentCOName]: {
+          ...this.state.units[this.state.currentCOName],
+          [this.state.currentUnitName]: {
+            ...this.state.units[this.state.currentCOName][this.state.currentUnitName],
+            [propertyName]: {
+              ...this.state.units[this.state.currentCOName][this.state.currentUnitName][propertyName],
+              [fieldName]: inputValue
+            }
+          }
         }
       }
     }));
@@ -99,10 +139,12 @@ class App extends Component {
             changeUnitName={this.changeUnitName}
           />
           <Editor
+            isJsonInit={this.state.isJsonInit}
             unitName={this.state.currentUnitName}
             coName={this.state.currentCOName}
             properties={this.state.options.unitProperties}
-            unit={this.state.units[this.state.currentUnitName]}
+            units={this.state.units[this.state.currentCOName]}
+            originUnits={this.state.units["Origin"]}
             changeJson={this.changeJson}
           />
         </div>
@@ -140,13 +182,17 @@ function ListElement(props) {
 
   return (
     <li className="Like-link" onClick={() => props.changeUnitName(props.name, props.isUnit)}>
-      <img src={imgSrc} width="30px" height="30px"/>
+      <img src={imgSrc} width="30px" height="30px" />
       {props.name}
     </li>
   );
 }
 
 function Editor(props) {
+  if (!props.isJsonInit || props.units == null || props.originUnits == null) {
+    return "";
+  }
+
   let unitImgSrc = "../resources/units/" + props.unitName + ".png";
   let coImgSrc = "../resources/co/" + props.coName + ".png";
 
@@ -155,18 +201,20 @@ function Editor(props) {
       <div className="Editor-header">
         <div className="Editor-header-element">
           <div>{props.unitName}</div>
-          <img src={unitImgSrc} width="100px" height="100px"/>
+          <img src={unitImgSrc} width="100px" height="100px" />
         </div>
         <div className="Editor-header-element">
           <div>{props.coName}</div>
-          <img src={coImgSrc} width="100px" height="100px"/>
+          <img src={coImgSrc} width="100px" height="100px" />
         </div>
       </div>
       <ul>
         {props.properties.map((item, index) => (
           <EditorElement
-            name={item.name}
-            value={props.unit === undefined ? "" : props.unit[item.name]}
+            coName={props.coName}
+            propertyName={item.name}
+            property={props.units[props.unitName][item.name]}
+            originProperty={props.originUnits[props.unitName][item.name]}
             changeJson={props.changeJson}
           />
         ))}
@@ -176,10 +224,22 @@ function Editor(props) {
 }
 
 function EditorElement(props) {
+  if (props.property == null) {
+    return "";
+  }
+
+  let isNotOrigin = props.coName !== "Origin";
+  let hasNotOwnValue = isNotOrigin && !props.property.hasValue;
+
   return (
     <li className="Editor-container">
-      <div className="Editor-container-element">{props.name}</div>
-      <input className="Editor-input" value={props.value} onChange={(event) => props.changeJson(event, props.name)}/>
+      <div className="Editor-container-element">{props.propertyName}</div>
+      {isNotOrigin ? <input type="checkbox" checked={props.property.hasValue} onChange={(event) => props.changeJson(event, props.propertyName, false)} /> : ""}
+      <input
+        className="Editor-input"
+        value={hasNotOwnValue ? props.originProperty.value : props.property.value}
+        disabled={hasNotOwnValue}
+        onChange={(event) => props.changeJson(event, props.propertyName, true)} />
     </li>
   );
 }

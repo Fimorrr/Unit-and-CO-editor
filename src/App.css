@@ -71,7 +71,7 @@ li {
 }
 
 .Editor-container-element {
-  flex: 50%;
+  width: 200px;
 }
 
 .Editor-input {
