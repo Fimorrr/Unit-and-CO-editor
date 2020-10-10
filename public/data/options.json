@@ -1,4 +1,90 @@
 {
+	"unitProperties": [
+		{
+			"name": "vision",
+			"type": "int"
+		},
+		{
+			"name": "movement",
+			"type": "int"
+		},
+		{
+			"name": "movementType",
+			"type": "enum"
+		},
+		{
+			"name": "baseDefence",
+			"type": "int"
+		},
+		{
+			"name": "armorType",
+			"type": "enum"
+		},
+		{
+			"name": "lAttack",
+			"type": "int"
+		},
+		{
+			"name": "mAttack",
+			"type": "int"
+		},
+		{
+			"name": "hAttack",
+			"type": "int"
+		},
+		{
+			"name": "uAttack",
+			"type": "int"
+		},
+		{
+			"name": "ammo",
+			"type": "int"
+		},
+		{
+			"name":"attackInnerRad",
+			"type": "int"
+		},
+		{
+			"name":"attackOuterRad",
+			"type": "int"
+		},
+		{
+			"name":"price",
+			"type": "int"
+		},
+		{
+			"name":"loadCapacity",
+			"type": "int"
+		},
+		{
+			"name":"bounty",
+			"type": "int"
+		},
+		{
+			"name":"isNeutralOnly",
+			"type": "bool"
+		},
+		{
+			"name":"canBeDetected",
+			"type": "bool"
+		},
+		{
+			"name":"canCapture",
+			"type": "bool"
+		},
+		{
+			"name":"canMoveAfterBuild",
+			"type": "bool"
+		},
+		{
+			"name":"canAttackAfterMove",
+			"type": "bool"
+		},
+		{
+			"name":"canCounterAttack",
+			"type": "bool"
+		}
+	],
 	"unitNames": [
 		"Armored car",
 		"Artillery",
@@ -11,51 +97,28 @@
 		"Transport",
 		"Bomber"
 	],
-	"unitProperties": [
-		{
-			"name": "vision",
-			"type": ""
-		},
-		{
-			"name": "movement",
-			"type": ""
-		},
-		{
-			"name": "movementType",
-			"type": ""
-		},
-		{
-			"name": "baseDefence",
-			"type": ""
-		},
-		{
-			"name": "armorType",
-			"type": ""
-		},
-		{
-			"name": "lAttack",
-			"type": ""
-		},
-		{
-			"name": "mAttack",
-			"type": ""
-		},
-		{
-			"name": "hAttack",
-			"type": ""
-		},
-		{
-			"name": "uAttack",
-			"type": ""
-		},
-		{
-			"name": "ammo",
-			"type": ""
-		}
-	],
 	"coNames": [
 		"Origin",
 		"Friedrich",
 		"JulyWolf"
-	]
+	],
+	"fractionNames": [
+		"League",
+		"Reich",
+		"Union"
+	],
+	"dictionaries": {
+		"movementType": [
+			"boot",
+			"horse",
+			"wheel",
+			"flying",
+			"ship"
+		],
+		"armorType": [
+			"light",
+			"medium",
+			"heavy"
+		]
+	}
 }

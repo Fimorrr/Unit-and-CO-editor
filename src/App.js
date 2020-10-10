@@ -8,13 +8,16 @@ class App extends Component {
 
     this.state = {
       options: {
-        unitNames: [],
         unitProperties: [],
-        coNames: []
+        unitNames: [],
+        coNames: [],
+        fractionNames: [],
+        dictionaries: {}
       },
       units: {},
       currentUnitName: "Infantry",
       currentCOName: "Origin",
+      currentFractionName: "League",
       isJsonInit: false
     };
 
@@ -32,7 +35,7 @@ class App extends Component {
     });
 
     this.changeJson = this.changeJson.bind(this);
-    this.changeUnitName = this.changeUnitName.bind(this);
+    this.changeCurrentName = this.changeCurrentName.bind(this);
   }
 
   initJson = () => {
@@ -58,7 +61,7 @@ class App extends Component {
                 [unitName]: {
                   ...this.state.units[coName][unitName],
                   [unitProperty.name]: {
-                    value: "",
+                    value: this.getInitValue(unitProperty.type),
                     hasValue: false
                   }
                 }
@@ -72,6 +75,15 @@ class App extends Component {
     this.setState(() => ({
       isJsonInit: true
     }));
+  }
+
+  getInitValue = (type) => {
+    if (type === "int" || type === "enum") {
+      return 0;
+    }
+    if (type === "bool") {
+      return false;
+    }
   }
 
   changeJson = (event, propertyName, isProperty) => {
@@ -111,15 +123,20 @@ class App extends Component {
     console.log("Json generated");
   }
 
-  changeUnitName = (unitName, isUnit) => {
-    if (isUnit) {
+  changeCurrentName = (name, type) => {
+    if (type === "unit") {
       this.setState(() => ({
-        currentUnitName: unitName
+        currentUnitName: name
       }));
     }
-    else {
+    else if (type === "co") {
       this.setState(() => ({
-        currentCOName: unitName
+        currentCOName: name
+      }));
+    }
+    else if (type === "fraction") {
+      this.setState(() => ({
+        currentFractionName: name
       }));
     }
   }
@@ -128,22 +145,34 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-container">
+          <div>
+            <UnitList
+              names={this.state.options.unitNames}
+              type="unit"
+              currentName={this.state.currentUnitName}
+              changeCurrentName={this.changeCurrentName}
+            />
+            <hr></hr>
+            <UnitList
+              names={this.state.options.coNames}
+              type="co"
+              currentName={this.state.currentCOName}
+              changeCurrentName={this.changeCurrentName}
+            />
+          </div>
           <UnitList
-            names={this.state.options.unitNames}
-            isUnit={true}
-            changeUnitName={this.changeUnitName}
-          />
-          <UnitList
-            names={this.state.options.coNames}
-            isUnit={false}
-            changeUnitName={this.changeUnitName}
-          />
+              names={this.state.options.fractionNames}
+              type="fraction"
+              currentName={this.state.currentFractionName}
+              changeCurrentName={this.changeCurrentName}
+            />
           <Editor
             isJsonInit={this.state.isJsonInit}
             unitName={this.state.currentUnitName}
             coName={this.state.currentCOName}
             properties={this.state.options.unitProperties}
             units={this.state.units[this.state.currentCOName]}
+            dictionaries={this.state.options.dictionaries}
             originUnits={this.state.units["Origin"]}
             changeJson={this.changeJson}
           />
@@ -161,8 +190,9 @@ function UnitList(props) {
         {props.names.map((item, index) => (
           <ListElement
             name={item}
-            isUnit={props.isUnit}
-            changeUnitName={props.changeUnitName}
+            type={props.type}
+            isSelected={props.currentName === item}
+            changeCurrentName={props.changeCurrentName}
           />
         ))}
       </ul>
@@ -173,15 +203,18 @@ function UnitList(props) {
 function ListElement(props) {
   let imgSrc = "";
 
-  if (props.isUnit) {
+  if (props.type === "unit") {
     imgSrc = "../resources/units/" + props.name + ".png";
   }
-  else {
+  else if (props.type === "co") {
     imgSrc = "../resources/co/" + props.name + ".png";
+  }
+  else if (props.type === "fraction") {
+    imgSrc = "../resources/fractions/" + props.name + ".png";
   }
 
   return (
-    <li className="Like-link" onClick={() => props.changeUnitName(props.name, props.isUnit)}>
+    <li className={props.isSelected ? "Like-link-selected" : "Like-link"} onClick={() => props.changeCurrentName(props.name, props.type)}>
       <img src={imgSrc} width="30px" height="30px" />
       {props.name}
     </li>
@@ -213,6 +246,8 @@ function Editor(props) {
           <EditorElement
             coName={props.coName}
             propertyName={item.name}
+            propertyType={item.type}
+            dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
             property={props.units[props.unitName][item.name]}
             originProperty={props.originUnits[props.unitName][item.name]}
             changeJson={props.changeJson}
@@ -231,15 +266,47 @@ function EditorElement(props) {
   let isNotOrigin = props.coName !== "Origin";
   let hasNotOwnValue = isNotOrigin && !props.property.hasValue;
 
+  let control;
+
+  if (props.propertyType === "enum") {
+    control = (
+      <select
+        className="Editor-input"
+        disabled={hasNotOwnValue}
+        value={hasNotOwnValue ? props.originProperty.value : props.property.value}
+        onChange={(event) => props.changeJson(event, props.propertyName, true)}>
+        {props.dictionary.map((item, index) => (
+          <option value={index}>{item}</option>
+        ))}
+      </select>
+    )
+  }
+  else if (props.propertyType === "bool") {
+    control = (
+      <input
+        className="Editor-input"
+        type="checkbox"
+        value={hasNotOwnValue ? props.originProperty.value : props.property.value}
+        disabled={hasNotOwnValue}
+        onChange={(event) => props.changeJson(event, props.propertyName, true)} />
+    )
+  }
+  else {
+    control = (
+      <input
+        className="Editor-input"
+        type="number"
+        value={hasNotOwnValue ? props.originProperty.value : props.property.value}
+        disabled={hasNotOwnValue}
+        onChange={(event) => props.changeJson(event, props.propertyName, true)} />
+    )
+  }
+
   return (
     <li className="Editor-container">
       <div className="Editor-container-element">{props.propertyName}</div>
       {isNotOrigin ? <input type="checkbox" checked={props.property.hasValue} onChange={(event) => props.changeJson(event, props.propertyName, false)} /> : ""}
-      <input
-        className="Editor-input"
-        value={hasNotOwnValue ? props.originProperty.value : props.property.value}
-        disabled={hasNotOwnValue}
-        onChange={(event) => props.changeJson(event, props.propertyName, true)} />
+      {control}
     </li>
   );
 }
