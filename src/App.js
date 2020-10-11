@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Editor from './Components/Editor'
 import UnitList from './Components/UnitList';
+import UpgradeList from './Components/UpgradeList';
 import './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         dictionaries: {}
       },
       units: {},
+      upgrades: {},
       currentUnitName: "Infantry",
       currentCOName: "Origin",
       currentFractionName: "League",
@@ -37,11 +39,14 @@ class App extends Component {
 
     this.changeJson = this.changeJson.bind(this);
     this.changeCurrentName = this.changeCurrentName.bind(this);
+    this.addUpgradeRow = this.addUpgradeRow.bind(this);  
+    this.addUpgradeItem = this.addUpgradeItem.bind(this);
   }
 
   initJson = () => {
-    let {unitNames, unitProperties, coNames} = this.state.options;
+    let {unitNames, unitProperties, coNames, fractionNames} = this.state.options;
 
+    //Прединициация юнитов
     coNames.forEach((coName) => {
       this.setState(() => ({
         units: {
@@ -50,7 +55,7 @@ class App extends Component {
         }
       }));
     });
-
+    //Инициация юнитов
     coNames.forEach((coName) => {
       unitNames.forEach((unitName) => {
         unitProperties.forEach((unitProperty) => {
@@ -70,6 +75,30 @@ class App extends Component {
             }
           }));
         });
+      });
+    });
+
+    //Прединициация апгрейдов
+    fractionNames.forEach((fractionName) => {
+      this.setState(() => ({
+        upgrades: {
+          ...this.state.upgrades,
+          [fractionName]: {}
+        }
+      }));
+    });
+    //Инициация апгрейдов
+    fractionNames.forEach((fractionName) => {
+      unitNames.forEach((unitName) => {
+        this.setState(() => ({
+          upgrades: {
+            ...this.state.upgrades,
+            [fractionName]: {
+              ...this.state.upgrades[fractionName],
+              [unitName]: []
+            }
+          }
+        }));
       });
     });
 
@@ -120,6 +149,32 @@ class App extends Component {
     console.log(this.state);
   }
 
+  addUpgradeRow = () => {
+
+  }
+
+  addUpgradeItem = (rowNumber) => {
+    let {currentUnitName, currentFractionName} = this.state;
+
+    this.setState(() => ({
+      upgrades: {
+        ...this.state.upgrades,
+        [currentFractionName]: {
+          ...this.state.upgrades[currentFractionName],
+          [currentUnitName]: [
+            ...this.state.upgrades[currentFractionName][currentUnitName],
+            {
+              rowNumber: rowNumber,
+              itemName: "item"
+            }
+          ]
+        }
+      }
+    }));
+
+    console.log(this.state);
+  }
+
   generateJson = () => {
     console.log("Json generated");
   }
@@ -146,14 +201,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-container">
-          <div>
+          <div className="App-container-block">
             <UnitList
               names={this.state.options.unitNames}
               type="unit"
               currentName={this.state.currentUnitName}
               changeCurrentName={this.changeCurrentName}
             />
-            <hr></hr>
+            <hr/>
             <UnitList
               names={this.state.options.coNames}
               type="co"
@@ -161,12 +216,21 @@ class App extends Component {
               changeCurrentName={this.changeCurrentName}
             />
           </div>
-          <div>
+          <div className="App-container-block">
             <UnitList
               names={this.state.options.fractionNames}
               type="fraction"
               currentName={this.state.currentFractionName}
               changeCurrentName={this.changeCurrentName}
+            />
+            <hr/>
+            <UpgradeList
+              isJsonInit={this.state.isJsonInit}
+              unitName={this.state.currentUnitName}
+              fractionName={this.state.currentFractionName}
+              upgrades={this.state.upgrades}
+              addUpgradeRow={this.addUpgradeRow}
+              addUpgradeItem={this.addUpgradeItem}
             />
           </div>
           <Editor

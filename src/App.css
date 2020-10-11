@@ -93,3 +93,24 @@ li {
   color:red;
   text-decoration:underline;
 }
+
+.Upgrade-row {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.Upgrade-item {
+  display: flex;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 1px solid black;
+}
+
+.Upgrade-item-delete {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -4,7 +4,7 @@ import '../App.css';
 
 function UnitList(props) {
 	return (
-		<div className="App-container-block">
+		<div>
 			<ul>
 				{props.names.map((item, index) => (
 					<ListElement
