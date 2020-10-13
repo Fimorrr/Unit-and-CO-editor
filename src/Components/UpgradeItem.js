@@ -7,7 +7,10 @@ function UpgradeItem(props) {
 	return (
 		<div className="Upgrade-item">
 			Item
-			<button className="Upgrade-item-delete">x</button>
+			<button
+				onClick={() => props.deleteUpgradeItem(props.item.itemID)}
+				className="Upgrade-item-delete"
+			>x</button>
 		</div>
 	);
 }

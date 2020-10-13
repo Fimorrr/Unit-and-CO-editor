@@ -28,6 +28,7 @@ function UpgradeList(props) {
 					rowNumber={index}
 					upgradeItems={item}
 					addUpgradeItem={props.addUpgradeItem}
+					deleteUpgradeItem={props.deleteUpgradeItem}
 				/>
 			))}
 			

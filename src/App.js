@@ -39,7 +39,7 @@ class App extends Component {
 
     this.changeJson = this.changeJson.bind(this);
     this.changeCurrentName = this.changeCurrentName.bind(this);
-    this.addUpgradeRow = this.addUpgradeRow.bind(this);  
+    this.deleteUpgradeItem = this.deleteUpgradeItem.bind(this);  
     this.addUpgradeItem = this.addUpgradeItem.bind(this);
   }
 
@@ -149,12 +149,30 @@ class App extends Component {
     console.log(this.state);
   }
 
-  addUpgradeRow = () => {
+  deleteUpgradeItem = (itemID) => {
+    let {currentUnitName, currentFractionName} = this.state;
 
+    this.setState(() => ({
+      upgrades: {
+        ...this.state.upgrades,
+        [currentFractionName]: {
+          ...this.state.upgrades[currentFractionName],
+          [currentUnitName]: this.state.upgrades[currentFractionName][currentUnitName].filter((item) => (
+            item.itemID !== itemID
+          ))
+        }
+      }
+    }));
+
+    console.log(this.state);
   }
 
   addUpgradeItem = (rowNumber) => {
     let {currentUnitName, currentFractionName} = this.state;
+
+    let itemID = 1 + this.state.upgrades[currentFractionName][currentUnitName].reduce((prev, curr) => (
+      Math.max(prev, curr.itemID)
+    ), -1);
 
     this.setState(() => ({
       upgrades: {
@@ -165,6 +183,7 @@ class App extends Component {
             ...this.state.upgrades[currentFractionName][currentUnitName],
             {
               rowNumber: rowNumber,
+              itemID: itemID,
               itemName: "item"
             }
           ]
@@ -229,7 +248,7 @@ class App extends Component {
               unitName={this.state.currentUnitName}
               fractionName={this.state.currentFractionName}
               upgrades={this.state.upgrades}
-              addUpgradeRow={this.addUpgradeRow}
+              deleteUpgradeItem={this.deleteUpgradeItem}
               addUpgradeItem={this.addUpgradeItem}
             />
           </div>

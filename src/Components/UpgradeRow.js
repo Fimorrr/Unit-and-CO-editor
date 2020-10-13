@@ -8,7 +8,12 @@ function UpgradeRow(props) {
 	return (
 		<div className="Upgrade-row">
 			{props.upgradeItems.map((item, index) => (
-				<UpgradeItem/>
+				<UpgradeItem
+					rowNumber={props.rowNumber}
+					itemNumber={index}
+					item={props.upgradeItems[index]}
+					deleteUpgradeItem={props.deleteUpgradeItem}
+				/>
 			))}
 			<button onClick={() => props.addUpgradeItem(props.rowNumber)}>+</button>
 		</div>
