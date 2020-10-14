@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Editor from './Components/Editor'
+import UpgradeEditor from './Components/UpgradeEditor'
 import UnitList from './Components/UnitList';
 import UpgradeList from './Components/UpgradeList';
 import './App.css';
@@ -21,6 +22,7 @@ class App extends Component {
       currentUnitName: "Infantry",
       currentCOName: "Origin",
       currentFractionName: "League",
+      currentUpgradeID: -1,
       isJsonInit: false
     };
 
@@ -116,7 +118,7 @@ class App extends Component {
     }
   }
 
-  changeJson = (event, propertyName, isProperty) => {
+  changeJson = (event, propertyName, isProperty, upgradeNumber) => {
     let fieldName = "value";
 
     if (!isProperty) {
@@ -130,27 +132,47 @@ class App extends Component {
       inputValue = event.target.checked;
     }
 
-    this.setState(() => ({
-      units: {
-        ...this.state.units,
-        [this.state.currentCOName]: {
-          ...this.state.units[this.state.currentCOName],
-          [this.state.currentUnitName]: {
-            ...this.state.units[this.state.currentCOName][this.state.currentUnitName],
-            [propertyName]: {
-              ...this.state.units[this.state.currentCOName][this.state.currentUnitName][propertyName],
-              [fieldName]: inputValue
+    if (upgradeNumber !== -1) {
+      let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
+      copyUnits[upgradeNumber][propertyName][fieldName] =  inputValue;
+
+      this.setState(() => ({
+        upgrades: {
+          ...this.state.upgrades,
+          [this.state.currentFractionName]: {
+            ...this.state.upgrades[this.state.currentFractionName],
+            [this.state.currentUnitName]: copyUnits
+          }
+        }
+      }));
+    }
+    else {
+      this.setState(() => ({
+        units: {
+          ...this.state.units,
+          [this.state.currentCOName]: {
+            ...this.state.units[this.state.currentCOName],
+            [this.state.currentUnitName]: {
+              ...this.state.units[this.state.currentCOName][this.state.currentUnitName],
+              [propertyName]: {
+                ...this.state.units[this.state.currentCOName][this.state.currentUnitName][propertyName],
+                [fieldName]: inputValue
+              }
             }
           }
         }
-      }
-    }));
+      }));
+    }
 
     console.log(this.state);
   }
 
   deleteUpgradeItem = (itemID) => {
-    let {currentUnitName, currentFractionName} = this.state;
+    let {currentUnitName, currentFractionName, currentUpgradeID} = this.state;
+
+    if (currentUpgradeID === itemID) {
+      this.changeCurrentName(-1, "upgrade");
+    }
 
     this.setState(() => ({
       upgrades: {
@@ -174,6 +196,18 @@ class App extends Component {
       Math.max(prev, curr.itemID)
     ), -1);
 
+    let upgradeUnitProperies = {};
+
+    this.state.options.unitProperties.forEach((unitProperty) => {
+      upgradeUnitProperies = {
+        ...upgradeUnitProperies,
+        [unitProperty.name]: {
+          value: this.getInitValue(unitProperty.type),
+          hasValue: false
+        }
+      }
+    });
+
     this.setState(() => ({
       upgrades: {
         ...this.state.upgrades,
@@ -184,7 +218,8 @@ class App extends Component {
             {
               rowNumber: rowNumber,
               itemID: itemID,
-              itemName: "item"
+              itemName: "item",
+              unitProperties: upgradeUnitProperies
             }
           ]
         }
@@ -212,6 +247,11 @@ class App extends Component {
     else if (type === "fraction") {
       this.setState(() => ({
         currentFractionName: name
+      }));
+    }
+    else if (type === "upgrade") {
+      this.setState(() => ({
+        currentUpgradeID: name
       }));
     }
   }
@@ -250,6 +290,18 @@ class App extends Component {
               upgrades={this.state.upgrades}
               deleteUpgradeItem={this.deleteUpgradeItem}
               addUpgradeItem={this.addUpgradeItem}
+              changeCurrentName={this.changeCurrentName}
+            />
+            <UpgradeEditor
+              isJsonInit={this.state.isJsonInit}
+              properties={this.state.options.unitProperties}
+              dictionaries={this.state.options.dictionaries}
+              fractionName={this.state.currentFractionName}
+              unitName={this.state.currentUnitName}
+              upgrades={this.state.upgrades}
+              currentUpgradeID={this.state.currentUpgradeID}
+              changeCurrentName={this.changeCurrentName}
+              changeJson={this.changeJson}
             />
           </div>
           <Editor

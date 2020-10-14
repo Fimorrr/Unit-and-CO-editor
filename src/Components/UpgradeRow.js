@@ -13,6 +13,7 @@ function UpgradeRow(props) {
 					itemNumber={index}
 					item={props.upgradeItems[index]}
 					deleteUpgradeItem={props.deleteUpgradeItem}
+					changeCurrentName={props.changeCurrentName}
 				/>
 			))}
 			<button onClick={() => props.addUpgradeItem(props.rowNumber)}>+</button>

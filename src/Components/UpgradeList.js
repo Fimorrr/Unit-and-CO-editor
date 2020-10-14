@@ -29,6 +29,7 @@ function UpgradeList(props) {
 					upgradeItems={item}
 					addUpgradeItem={props.addUpgradeItem}
 					deleteUpgradeItem={props.deleteUpgradeItem}
+					changeCurrentName={props.changeCurrentName}
 				/>
 			))}
 			
