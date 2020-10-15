@@ -33,10 +33,13 @@ class App extends Component {
         options: data
       }));
 
-      this.initJson();
-    }).catch(err => {
-      // Do something for an error here
-      console.log("Error Reading data " + err);
+      fetch('../data/unitProperties.json').then(response => {
+        return response.json();
+      }).then(data => {
+        this.initJson(data);
+      }).catch(error => {
+        this.initJson(null);
+      });
     });
 
     this.changeJson = this.changeJson.bind(this);
@@ -45,7 +48,7 @@ class App extends Component {
     this.addUpgradeItem = this.addUpgradeItem.bind(this);
   }
 
-  initJson = () => {
+  initJson = (data) => {
     let {unitNames, unitProperties, coNames, fractionNames} = this.state.options;
 
     //Прединициация юнитов
@@ -68,10 +71,7 @@ class App extends Component {
                 ...this.state.units[coName],
                 [unitName]: {
                   ...this.state.units[coName][unitName],
-                  [unitProperty.name]: {
-                    value: this.getInitValue(unitProperty.type),
-                    hasValue: false
-                  }
+                  [unitProperty.name]: this.getInitUnitObject(data, coName, unitName, unitProperty)
                 }
               }
             }
@@ -97,7 +97,7 @@ class App extends Component {
             ...this.state.upgrades,
             [fractionName]: {
               ...this.state.upgrades[fractionName],
-              [unitName]: []
+              [unitName]: this.getInitUpgradeArray(data, fractionName, unitName)
             }
           }
         }));
@@ -107,6 +107,44 @@ class App extends Component {
     this.setState(() => ({
       isJsonInit: true
     }));
+  }
+
+  getInitUnitObject = (data, coName, unitName, unitProperty) => {
+    if (data === null || !data.units[coName] || !data.units[coName][unitName] || !data.units[coName][unitName][unitProperty.name]) {
+      return {
+        value: this.getInitValue(unitProperty.type),
+        hasValue: false
+      }  
+    }
+
+    let dataUnitProperty = data.units[coName][unitName][unitProperty.name];
+
+    return {
+      value: dataUnitProperty.value,
+      hasValue: dataUnitProperty.hasValue
+    }
+  }
+
+  getInitUpgradeArray = (data, fractionName, unitName) => {
+    if (data === null || !data.upgrades[fractionName] || !data.upgrades[fractionName][unitName]) {
+      return [];
+    }
+
+    let upgradeArray = data.upgrades[fractionName][unitName];
+
+    this.state.options.unitProperties.forEach((unitProperty) => {
+      upgradeArray.forEach((upgradeItem) => {
+        //Если нет property, то добавляем
+        if (!upgradeItem.unitProperties[unitProperty.name]) {
+          upgradeItem.unitProperties[unitProperty.name] = {
+            value: this.getInitValue(unitProperty.type),
+            hasValue: false
+          };
+        }
+      });
+    });
+
+    return upgradeArray;
   }
 
   getInitValue = (type) => {
@@ -230,7 +268,22 @@ class App extends Component {
   }
 
   generateJson = () => {
-    console.log("Json generated");
+    let exportObject = {
+      units: this.state.units,
+      upgrades: this.state.upgrades
+    }
+
+    this.downloadObjectAsJson(exportObject, "unitProperties");
+  }
+
+  downloadObjectAsJson = (exportObj, exportName) => {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
   }
 
   changeCurrentName = (name, type) => {
