@@ -31,6 +31,7 @@ function Editor(props) {
             dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
             property={props.units[props.unitName][item.name]}
             originProperty={props.originUnits[props.unitName][item.name]}
+            upgradeNumber={-1}
             changeJson={props.changeJson}
           />
         ))}

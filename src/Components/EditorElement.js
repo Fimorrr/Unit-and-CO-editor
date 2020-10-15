@@ -17,7 +17,7 @@ function EditorElement(props) {
           className="Editor-input"
           disabled={hasNotOwnValue}
           value={hasNotOwnValue ? props.originProperty.value : props.property.value}
-          onChange={(event) => props.changeJson(event, props.propertyName, true)}>
+          onChange={(event) => props.changeJson(event, props.propertyName, true, props.upgradeNumber)}>
           {props.dictionary.map((item, index) => (
             <option value={index}>{item}</option>
           ))}
@@ -31,7 +31,7 @@ function EditorElement(props) {
           type="checkbox"
           value={hasNotOwnValue ? props.originProperty.value : props.property.value}
           disabled={hasNotOwnValue}
-          onChange={(event) => props.changeJson(event, props.propertyName, true)} />
+          onChange={(event) => props.changeJson(event, props.propertyName, true, props.upgradeNumber)} />
       )
     }
     else {
@@ -41,14 +41,14 @@ function EditorElement(props) {
           type="number"
           value={hasNotOwnValue ? props.originProperty.value : props.property.value}
           disabled={hasNotOwnValue}
-          onChange={(event) => props.changeJson(event, props.propertyName, true)} />
+          onChange={(event) => props.changeJson(event, props.propertyName, true, props.upgradeNumber)} />
       )
     }
   
     return (
       <li className="Editor-container">
         <div className="Editor-container-element">{props.propertyName}</div>
-        {isNotOrigin ? <input type="checkbox" checked={props.property.hasValue} onChange={(event) => props.changeJson(event, props.propertyName, false)} /> : ""}
+        {isNotOrigin ? <input type="checkbox" checked={props.property.hasValue} onChange={(event) => props.changeJson(event, props.propertyName, false, props.upgradeNumber)} /> : ""}
         {control}
       </li>
     );

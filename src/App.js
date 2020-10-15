@@ -134,7 +134,7 @@ class App extends Component {
 
     if (upgradeNumber !== -1) {
       let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
-      copyUnits[upgradeNumber][propertyName][fieldName] =  inputValue;
+      copyUnits[upgradeNumber]["unitProperties"][propertyName][fieldName] =  inputValue;
 
       this.setState(() => ({
         upgrades: {

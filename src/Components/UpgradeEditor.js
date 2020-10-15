@@ -10,7 +10,9 @@ function UpgradeEditor(props) {
 
     let itemNumber = -1;
     props.upgrades[props.fractionName][props.unitName].forEach((item, index) => {
-        //TODO
+        if (item.itemID === props.currentUpgradeID) {
+            itemNumber = index;
+        }
     });
 
 	return (
@@ -24,7 +26,7 @@ function UpgradeEditor(props) {
                         propertyType={item.type}
                         dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
                         itemNumber={itemNumber}
-                        property={props.upgrades[props.fractionName][props.unitName][itemNumber]}
+                        property={props.upgrades[props.fractionName][props.unitName][itemNumber]["unitProperties"][item.name]}
                         originProperty={{value: ""}}
                         upgradeNumber={itemNumber}
                         changeJson={props.changeJson}
