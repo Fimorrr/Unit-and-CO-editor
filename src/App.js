@@ -110,14 +110,21 @@ class App extends Component {
   }
 
   getInitUnitObject = (data, coName, unitName, unitProperty) => {
-    if (data === null || !data.units[coName] || !data.units[coName][unitName] || !data.units[coName][unitName][unitProperty.name]) {
-      return {
-        value: this.getInitValue(unitProperty.type),
-        hasValue: false
-      }  
+    var initProperty = {
+      value: this.getInitValue(unitProperty.type),
+      hasValue: false
+    };
+
+    if (data === null) {
+      return initProperty;
     }
 
-    let dataUnitProperty = data.units[coName][unitName][unitProperty.name];
+    let unit = data.units.find((item) => item.coName === coName && item.unitName === unitName);
+    if (!unit || !unit.stats[unitProperty.name]) {
+      return initProperty;
+    }
+
+    let dataUnitProperty = unit.stats[unitProperty.name];
 
     return {
       value: dataUnitProperty.value,
@@ -126,12 +133,17 @@ class App extends Component {
   }
 
   getInitUpgradeArray = (data, fractionName, unitName) => {
-    if (data === null || !data.upgrades[fractionName] || !data.upgrades[fractionName][unitName]) {
+    if (data === null) {
       return [];
     }
 
-    let upgradeArray = data.upgrades[fractionName][unitName];
+    let upgrade = data.upgrades.find((item) => item.fractionName === fractionName && item.unitName === unitName);
+    if (!upgrade || !upgrade.upgradeList) {
+      return [];
+    }
 
+    let upgradeArray = upgrade.upgradeList;
+    
     this.state.options.unitProperties.forEach((unitProperty) => {
       upgradeArray.forEach((upgradeItem) => {
         //Если нет property, то добавляем
@@ -268,10 +280,37 @@ class App extends Component {
   }
 
   generateJson = () => {
-    let exportObject = {
+    /*let exportObject = {
       units: this.state.units,
       upgrades: this.state.upgrades
-    }
+    };*/
+
+    let exportObject = {
+      units: [],
+      upgrades: []
+    };
+
+    let {unitNames, coNames, fractionNames} = this.state.options;
+
+    coNames.forEach((coName) => {
+      unitNames.forEach((unitName) => {
+        exportObject.units.push({
+          "coName": coName,
+          "unitName": unitName,
+          "stats": this.state.units[coName][unitName]
+        });
+      });
+    });
+
+    fractionNames.forEach((fractionName) => {
+      unitNames.forEach((unitName) => {
+        exportObject.upgrades.push({
+          "fractionName": fractionName,
+          "unitName": unitName,
+          "upgradeList": this.state.upgrades[fractionName][unitName]
+        });
+      });
+    });
 
     this.downloadObjectAsJson(exportObject, "unitProperties");
   }
