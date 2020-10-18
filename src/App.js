@@ -46,6 +46,7 @@ class App extends Component {
     this.changeCurrentName = this.changeCurrentName.bind(this);
     this.deleteUpgradeItem = this.deleteUpgradeItem.bind(this);  
     this.addUpgradeItem = this.addUpgradeItem.bind(this);
+    this.changeUpgradeProperty = this.changeUpgradeProperty.bind(this);
   }
 
   initJson = (data) => {
@@ -217,6 +218,23 @@ class App extends Component {
     console.log(this.state);
   }
 
+  changeUpgradeProperty = (event, upgradeNumber) => {
+    let inputValue = event.target.value;
+
+    let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
+    copyUnits[upgradeNumber].icon = inputValue;
+
+    this.setState(() => ({
+      upgrades: {
+        ...this.state.upgrades,
+        [this.state.currentFractionName]: {
+          ...this.state.upgrades[this.state.currentFractionName],
+          [this.state.currentUnitName]: copyUnits
+        }
+      }
+    }));
+  }
+
   deleteUpgradeItem = (itemID) => {
     let {currentUnitName, currentFractionName, currentUpgradeID} = this.state;
 
@@ -269,6 +287,7 @@ class App extends Component {
               rowNumber: rowNumber,
               itemID: itemID,
               itemName: "item",
+              icon: 0,
               unitProperties: upgradeUnitProperies
             }
           ]
@@ -392,6 +411,7 @@ class App extends Component {
               unitName={this.state.currentUnitName}
               upgrades={this.state.upgrades}
               currentUpgradeID={this.state.currentUpgradeID}
+              changeUpgradeProperty={this.changeUpgradeProperty}
               changeCurrentName={this.changeCurrentName}
               changeJson={this.changeJson}
             />

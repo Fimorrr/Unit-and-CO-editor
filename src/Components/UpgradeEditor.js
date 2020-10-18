@@ -17,8 +17,16 @@ function UpgradeEditor(props) {
 
 	return (
 		<div className="Upgrade-editor">
-            <div>Upgrade Editor here {props.currentUpgradeID}</div>
-			<button onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
+            <div>Opened Item: {props.currentUpgradeID}</div>
+            <div className="Editor-container">
+                <div className="Editor-container-element">Icon: </div>
+                <input 
+                    className="Editor-input"
+                    type="number" 
+                    value={props.upgrades[props.fractionName][props.unitName][itemNumber].icon} 
+                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber)}/>
+            </div>
+            <button onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
             <ul>
                 {props.properties.map((item, index) => (
                     <EditorElement
