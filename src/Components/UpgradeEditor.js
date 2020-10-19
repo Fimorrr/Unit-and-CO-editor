@@ -24,7 +24,15 @@ function UpgradeEditor(props) {
                     className="Editor-input"
                     type="number" 
                     value={props.upgrades[props.fractionName][props.unitName][itemNumber].icon} 
-                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber)}/>
+                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "icon")}/>
+            </div>
+            <div className="Editor-container">
+                <div className="Editor-container-element">Price: </div>
+                <input 
+                    className="Editor-input"
+                    type="number" 
+                    value={props.upgrades[props.fractionName][props.unitName][itemNumber].price} 
+                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "price")}/>
             </div>
             <button onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
             <ul>

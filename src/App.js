@@ -218,11 +218,11 @@ class App extends Component {
     console.log(this.state);
   }
 
-  changeUpgradeProperty = (event, upgradeNumber) => {
+  changeUpgradeProperty = (event, upgradeNumber, upgradePropertyName) => {
     let inputValue = event.target.value;
 
     let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
-    copyUnits[upgradeNumber].icon = inputValue;
+    copyUnits[upgradeNumber][upgradePropertyName] = inputValue;
 
     this.setState(() => ({
       upgrades: {
@@ -288,6 +288,7 @@ class App extends Component {
               itemID: itemID,
               itemName: "item",
               icon: 0,
+              price: 1,
               unitProperties: upgradeUnitProperies
             }
           ]
