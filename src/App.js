@@ -3,6 +3,7 @@ import Editor from './Components/Editor'
 import UpgradeEditor from './Components/UpgradeEditor'
 import UnitList from './Components/UnitList';
 import UpgradeList from './Components/UpgradeList';
+import DamageTable from './Components/DamageTable';
 import './App.css';
 
 class App extends Component {
@@ -181,6 +182,12 @@ class App extends Component {
 
     if (inputType === "checkbox") {
       inputValue = event.target.checked;
+    }
+    else if (inputType === "number") {
+      inputValue = parseInt(inputValue);
+    }
+    else if (inputType === "select-one") {
+      inputValue = parseInt(inputValue);
     }
 
     if (upgradeNumber !== -1) {
@@ -429,6 +436,11 @@ class App extends Component {
           />
         </div>
         <button onClick={this.generateJson}>Download JSON</button>
+        <DamageTable
+          isJsonInit={this.state.isJsonInit}
+          options={this.state.options}
+          units={this.state.units}
+        />
       </div>
     );
   }

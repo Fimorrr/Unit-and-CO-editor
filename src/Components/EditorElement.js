@@ -29,7 +29,7 @@ function EditorElement(props) {
         <input
           className="Editor-input"
           type="checkbox"
-          value={hasNotOwnValue ? props.originProperty.value : props.property.value}
+          checked={hasNotOwnValue ? props.originProperty.value : props.property.value}
           disabled={hasNotOwnValue}
           onChange={(event) => props.changeJson(event, props.propertyName, true, props.upgradeNumber)} />
       )

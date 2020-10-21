@@ -19,6 +19,14 @@ function UpgradeEditor(props) {
 		<div className="Upgrade-editor">
             <div>Opened Item: {props.currentUpgradeID}</div>
             <div className="Editor-container">
+                <div className="Editor-container-element">Item Name: </div>
+                <input 
+                    className="Editor-input"
+                    type="text" 
+                    value={props.upgrades[props.fractionName][props.unitName][itemNumber].itemName} 
+                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "itemName")}/>
+            </div>
+            <div className="Editor-container">
                 <div className="Editor-container-element">Icon: </div>
                 <input 
                     className="Editor-input"

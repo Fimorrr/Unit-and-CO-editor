@@ -61,8 +61,8 @@
 			"type": "int"
 		},
 		{
-			"name":"isNeutralOnly",
-			"type": "bool"
+			"name":"flyCoef",
+			"type": "int"
 		},
 		{
 			"name":"canBeDetected",
@@ -83,18 +83,30 @@
 		{
 			"name":"canCounterAttack",
 			"type": "bool"
+		},
+		{
+			"name": "canAttackFly",
+			"type": "bool"
+		},
+		{
+			"name": "canAttackHighAir",
+			"type": "bool"
+		},
+		{
+			"name": "isHighAir",
+			"type": "bool"
 		}
 	],
 	"unitNames": [
-		"Armored car",
-		"Artillery",
+		"Infantry",
 		"Bazooka",
 		"Cavalry",
-		"Grenade Thrower",
-		"Infantry",
-		"Machine Gunner",
-		"Tank",
 		"Transport",
+		"Machine Gunner",
+		"Grenade Thrower",
+		"Armored car",
+		"Artillery",
+		"Tank",
 		"Bomber"
 	],
 	"coNames": [
@@ -119,6 +131,12 @@
 			"light",
 			"medium",
 			"heavy"
+		],
+		"landscape": [
+			"road",
+			"plain",
+			"wood",
+			"city"
 		]
 	}
 }

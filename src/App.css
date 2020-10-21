@@ -118,3 +118,15 @@ li {
 .Upgrade-editor {
   margin-top: 80px;
 }
+
+.Damage-container {
+  margin-top: 50px;
+}
+
+.Damage-table {
+  width: 100%;
+}
+
+.Damage-table td {
+  border: solid 1px black;
+}
