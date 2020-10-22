@@ -115,6 +115,10 @@ li {
   margin-right: 5px;
 }
 
+.Upgrade-item-selected {
+  color: red;
+}
+
 .Upgrade-editor {
   margin-top: 80px;
 }

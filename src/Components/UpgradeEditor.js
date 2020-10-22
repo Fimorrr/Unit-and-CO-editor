@@ -42,6 +42,14 @@ function UpgradeEditor(props) {
                     value={props.upgrades[props.fractionName][props.unitName][itemNumber].price} 
                     onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "price")}/>
             </div>
+            <div className="Editor-container">
+                <div className="Editor-container-element">Selected: </div>
+                <input 
+                    className="Editor-input"
+                    type="checkbox" 
+                    checked={props.upgrades[props.fractionName][props.unitName][itemNumber].selected} 
+                    onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "selected")}/>
+            </div>
             <button onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
             <ul>
                 {props.properties.map((item, index) => (

@@ -228,6 +228,10 @@ class App extends Component {
   changeUpgradeProperty = (event, upgradeNumber, upgradePropertyName) => {
     let inputValue = event.target.value;
 
+    if (upgradePropertyName === "selected") {
+      inputValue = event.target.checked;
+    }
+
     let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
     copyUnits[upgradeNumber][upgradePropertyName] = inputValue;
 
@@ -296,6 +300,7 @@ class App extends Component {
               itemName: "item",
               icon: 0,
               price: 1,
+              selected: false,
               unitProperties: upgradeUnitProperies
             }
           ]
@@ -410,6 +415,7 @@ class App extends Component {
               deleteUpgradeItem={this.deleteUpgradeItem}
               addUpgradeItem={this.addUpgradeItem}
               changeCurrentName={this.changeCurrentName}
+              changeUpgradeProperty={this.changeUpgradeProperty}
             />
             <UpgradeEditor
               isJsonInit={this.state.isJsonInit}
@@ -440,6 +446,7 @@ class App extends Component {
           isJsonInit={this.state.isJsonInit}
           options={this.state.options}
           units={this.state.units}
+          upgrades={this.state.upgrades}
         />
       </div>
     );

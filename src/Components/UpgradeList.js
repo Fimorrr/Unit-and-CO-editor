@@ -25,11 +25,15 @@ function UpgradeList(props) {
 		<div>
 			{upgradeRows.map((item, index) => (
 				<UpgradeRow
+					unitName={props.unitName}
+					fractionName={props.fractionName}
 					rowNumber={index}
 					upgradeItems={item}
+					upgrades={props.upgrades}
 					addUpgradeItem={props.addUpgradeItem}
 					deleteUpgradeItem={props.deleteUpgradeItem}
 					changeCurrentName={props.changeCurrentName}
+					changeUpgradeProperty={props.changeUpgradeProperty}
 				/>
 			))}
 			
