@@ -165,6 +165,9 @@ class App extends Component {
     if (type === "int" || type === "enum") {
       return 0;
     }
+    if (type === "string") {
+      return "";
+    }
     if (type === "bool") {
       return false;
     }
@@ -360,7 +363,8 @@ class App extends Component {
   changeCurrentName = (name, type) => {
     if (type === "unit") {
       this.setState(() => ({
-        currentUnitName: name
+        currentUnitName: name,
+        currentUpgradeID: -1
       }));
     }
     else if (type === "co") {
@@ -370,7 +374,8 @@ class App extends Component {
     }
     else if (type === "fraction") {
       this.setState(() => ({
-        currentFractionName: name
+        currentFractionName: name,
+        currentUpgradeID: -1
       }));
     }
     else if (type === "upgrade") {

@@ -127,6 +127,10 @@ li {
   margin-top: 50px;
 }
 
+.Damage-container-options {
+  display: flex;
+}
+
 .Damage-table {
   width: 100%;
 }

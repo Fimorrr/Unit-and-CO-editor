@@ -95,6 +95,86 @@
 		{
 			"name": "isHighAir",
 			"type": "bool"
+		},
+		{
+			"name": "vampireHeal",
+			"type": "int"
+		},
+		{
+			"name": "mergeHeal",
+			"type": "int"
+		},
+		{
+			"name": "killBounty",
+			"type": "int"
+		},
+		{
+			"name": "captureBounty",
+			"type": "int"
+		},
+		{
+			"name": "supplyHeal",
+			"type": "int"
+		},
+		{
+			"name": "endTurnHeal",
+			"type": "int"
+		},
+		{
+			"name": "afterDeathSpawnUnit",
+			"type": "string"
+		},
+		{
+			"name": "repairDiscount",
+			"type": "int"
+		},
+		{
+			"name": "repairBonus",
+			"type": "int"
+		},
+		{
+			"name": "allySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "allySupportDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "enemySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "enemySupportDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "bloodlustAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "bloodlustDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "roadAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "roadDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "woodAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "woodDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "captureProgressBonus",
+			"type": "int"
 		}
 	],
 	"unitNames": [

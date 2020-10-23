@@ -9,16 +9,22 @@ class DamageTable extends Component {
 			currentLandscape: 0,
 			attackCO: "Origin",
 			attackFraction: "League",
+			attackHp: 100,
 			defendCO: "Origin",
-			defendFraction: "League"
+			defendFraction: "League",
+			defendHp: 100
 		}
 	}
 
-	changeLandscape = (event, valueName) => {
+	changeProperty = (event, valueName) => {
+		let inputType = event.target.type;
 		let inputValue = event.target.value;
+		
+		if (inputType === "number") {
+			inputValue = parseInt(inputValue);
+		}
 
 		this.setState(() => ({
-			...this.state,
 			[valueName]: inputValue
 		}));
 	}
@@ -80,11 +86,20 @@ class DamageTable extends Component {
 		let attackUnit = this.getStats(this.state.attackCO, this.state.attackFraction, attackUnitName, upgraded);
 		let defendUnit = this.getStats(this.state.defendCO, this.state.defendFraction, defendUnitName, upgraded);
 
-		let flyCoef = 1;
-		let defence = defendUnit.baseDefence;
+		let attackHp = this.state.attackHp;
+		let defendHp = this.state.defendHp;
 
-		let attackHp = 100;
-		let defendHp = 100;
+		let defence = defendUnit.baseDefence;
+		
+		let flyCoef = 1;
+		let bloodlustCoef = 1;
+
+		if (attackHp <= 50) {
+			bloodlustCoef += (attackUnit.bloodlustAttackBonus / 100);
+		}
+		if (defendHp <= 50) {
+			bloodlustCoef -= (defendUnit.bloodlustDefendBonus / 100);
+		}
 
 		let attack = this.getDigit(attackHp);
 
@@ -104,8 +119,10 @@ class DamageTable extends Component {
 			}
 		}
 
+		let attackCoef = flyCoef * bloodlustCoef;
+
 		if (attackUnit.uAttack > 0) {
-			attack *= attackUnit.uAttack / 10 * ammo * flyCoef;
+			attack *= attackUnit.uAttack / 10 * ammo * attackCoef;
 		}
 		else {
 			let lAttack = 0;
@@ -131,9 +148,9 @@ class DamageTable extends Component {
 					break;
 			}
 
-			lAttack *= flyCoef;
-			mAttack *= flyCoef;
-			hAttack *= flyCoef;
+			lAttack *= attackCoef;
+			mAttack *= attackCoef;
+			hAttack *= attackCoef;
 
 			if (lAttack > mAttack && lAttack > hAttack)
 			{
@@ -196,60 +213,82 @@ class DamageTable extends Component {
 
 		return (
 			<div className="Damage-container">
-				<div className="Editor-container">
-					<div className="Editor-container-element">Attack CO: </div>
-					<select
-						className="Editor-input"
-						value={this.state.attackCO}
-						onChange={(event) => this.changeLandscape(event, "attackCO")}>
-						{this.props.options.coNames.map((item, index) => (
-							<option value={item}>{item}</option>
-						))}
-					</select>
-				</div>
-				<div className="Editor-container">
-					<div className="Editor-container-element">Attack Fraction: </div>
-					<select
-						className="Editor-input"
-						value={this.state.attackFraction}
-						onChange={(event) => this.changeLandscape(event, "attackFraction")}>
-						{this.props.options.fractionNames.map((item, index) => (
-							<option value={item}>{item}</option>
-						))}
-					</select>
-				</div>
-				<div className="Editor-container">
-					<div className="Editor-container-element">Defend CO: </div>
-					<select
-						className="Editor-input"
-						value={this.state.defendCO}
-						onChange={(event) => this.changeLandscape(event, "defendCO")}>
-						{this.props.options.coNames.map((item, index) => (
-							<option value={item}>{item}</option>
-						))}
-					</select>
-				</div>
-				<div className="Editor-container">
-					<div className="Editor-container-element">Defend Fraction: </div>
-					<select
-						className="Editor-input"
-						value={this.state.defendFraction}
-						onChange={(event) => this.changeLandscape(event, "defendFraction")}>
-						{this.props.options.fractionNames.map((item, index) => (
-							<option value={item}>{item}</option>
-						))}
-					</select>
-				</div>
-				<div className="Editor-container">
-					<div className="Editor-container-element">Landscape: </div>
-					<select
-						className="Editor-input"
-						value={this.state.currentLandscape}
-						onChange={(event) => this.changeLandscape(event, "currentLandscape")}>
-						{this.props.options.dictionaries.landscape.map((item, index) => (
-							<option value={index}>{item}</option>
-						))}
-					</select>
+				<div className="Damage-container-options">
+					<div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Attack CO: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackCO}
+								onChange={(event) => this.changeProperty(event, "attackCO")}>
+								{this.props.options.coNames.map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Attack Fraction: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackFraction}
+								onChange={(event) => this.changeProperty(event, "attackFraction")}>
+								{this.props.options.fractionNames.map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Attack HP: </div>
+							<input
+								className="Editor-input"
+								type="number"
+								value={this.state.attackHp}
+								onChange={(event) => this.changeProperty(event, "attackHp")}/>
+						</div>
+					</div>
+					<div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Defend CO: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendCO}
+								onChange={(event) => this.changeProperty(event, "defendCO")}>
+								{this.props.options.coNames.map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Defend Fraction: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendFraction}
+								onChange={(event) => this.changeProperty(event, "defendFraction")}>
+								{this.props.options.fractionNames.map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Defend HP: </div>
+							<input
+								className="Editor-input"
+								type="number"
+								value={this.state.defendHp}
+								onChange={(event) => this.changeProperty(event, "defendHp")}/>
+						</div>
+					</div>
+					<div className="Editor-container">
+						<div className="Editor-container-element">Landscape: </div>
+						<select
+							className="Editor-input"
+							value={this.state.currentLandscape}
+							onChange={(event) => this.changeProperty(event, "currentLandscape")}>
+							{this.props.options.dictionaries.landscape.map((item, index) => (
+								<option value={index}>{item}</option>
+							))}
+						</select>
+					</div>
 				</div>
 				<table className="Damage-table">
 					<tr>

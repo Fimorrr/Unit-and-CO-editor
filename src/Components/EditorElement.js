@@ -38,7 +38,7 @@ function EditorElement(props) {
       control = (
         <input
           className="Editor-input"
-          type="number"
+          type={props.propertyType === "int" ? "number" : "text"}
           value={hasNotOwnValue ? props.originProperty.value : props.property.value}
           disabled={hasNotOwnValue}
           onChange={(event) => props.changeJson(event, props.propertyName, true, props.upgradeNumber)} />
