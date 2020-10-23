@@ -137,7 +137,7 @@
 			"type": "int"
 		},
 		{
-			"name": "allySupportDefendBonus",
+			"name": "allySupportDefenceBonus",
 			"type": "int"
 		},
 		{
@@ -145,7 +145,7 @@
 			"type": "int"
 		},
 		{
-			"name": "enemySupportDefendBonus",
+			"name": "enemySupportDefenceBonus",
 			"type": "int"
 		},
 		{
@@ -153,7 +153,7 @@
 			"type": "int"
 		},
 		{
-			"name": "bloodlustDefendBonus",
+			"name": "bloodlustDefenceBonus",
 			"type": "int"
 		},
 		{
@@ -169,7 +169,7 @@
 			"type": "int"
 		},
 		{
-			"name": "woodDefendBonus",
+			"name": "woodDefenceBonus",
 			"type": "int"
 		},
 		{

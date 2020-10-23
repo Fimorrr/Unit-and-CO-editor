@@ -6,13 +6,18 @@ class DamageTable extends Component {
 		super(props);
 
 		this.state = {
-			currentLandscape: 0,
 			attackCO: "Origin",
 			attackFraction: "League",
 			attackHp: 100,
+			attackLandscape: 0,
+			attackSupportAllyCount: 0,
+			attackSupportEnemyCount: 0,
 			defendCO: "Origin",
 			defendFraction: "League",
-			defendHp: 100
+			defendHp: 100,
+			defendLandscape: 0,
+			defendSupportAllyCount: 0,
+			defendSupportEnemyCount: 0,
 		}
 	}
 
@@ -92,20 +97,47 @@ class DamageTable extends Component {
 		let defence = defendUnit.baseDefence;
 		
 		let flyCoef = 1;
-		let bloodlustCoef = 1;
+		let bloodlustAttackCoef = 1;
+		let bloodlustDefenceCoef = 1;
+		let landscapeAttackCoef = 1;
+		let landscapeDefenceCoef = 1;
+		let allyAttackSupportCoef = 1;
+		let allyDefenceSupportCoef = 1;
+		let enemyAttackSupportCoef = 1;
+		let enemyDefenceSupportCoef = 1;
 
 		if (attackHp <= 50) {
-			bloodlustCoef += (attackUnit.bloodlustAttackBonus / 100);
+			bloodlustAttackCoef += attackUnit.bloodlustAttackBonus / 100;
 		}
 		if (defendHp <= 50) {
-			bloodlustCoef -= (defendUnit.bloodlustDefendBonus / 100);
+			bloodlustDefenceCoef -= defendUnit.bloodlustDefenceBonus / 100;
 		}
 
 		let attack = this.getDigit(attackHp);
 
 		if (defendUnit.movementType !== this.getDictionaryIndex("movementType", "flying")) {
-			defence += parseInt(this.state.currentLandscape);
+			defence += parseInt(this.state.defendLandscape);
 		}
+
+		//Если дорога
+		if (parseInt(this.state.attackLandscape) === 0) {
+			landscapeAttackCoef += attackUnit.roadAttackBonus / 100;	
+		}
+		if (parseInt(this.state.defendLandscape) === 0) {
+			landscapeDefenceCoef -= defendUnit.roadDefenceBonus / 100;
+		}
+		//Если лес
+		if (parseInt(this.state.attackLandscape) === 2) {
+			landscapeAttackCoef += attackUnit.woodAttackBonus / 100;
+		}
+		if (parseInt(this.state.defendLandscape) === 2) {
+			landscapeDefenceCoef -= defendUnit.woodDefenceBonus / 100;
+		}
+
+		allyAttackSupportCoef += this.state.attackSupportAllyCount * attackUnit.allySupportAttackBonus / 100;
+		allyDefenceSupportCoef -= this.state.defendSupportAllyCount * defendUnit.allySupportDefenceBonus / 100;
+		enemyAttackSupportCoef += this.state.attackSupportEnemyCount * attackUnit.enemySupportAttackBonus / 100;
+		enemyDefenceSupportCoef -= this.state.defendSupportEnemyCount * defendUnit.enemySupportDefenceBonus / 100;
 
 		if (defendUnit.movementType === this.getDictionaryIndex("movementType", "flying")) {
 			if (!attackUnit.canAttackHighAir && defendUnit.isHighAir) {
@@ -119,7 +151,7 @@ class DamageTable extends Component {
 			}
 		}
 
-		let attackCoef = flyCoef * bloodlustCoef;
+		let attackCoef = flyCoef * bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef;
 
 		if (attackUnit.uAttack > 0) {
 			attack *= attackUnit.uAttack / 10 * ammo * attackCoef;
@@ -245,6 +277,39 @@ class DamageTable extends Component {
 								value={this.state.attackHp}
 								onChange={(event) => this.changeProperty(event, "attackHp")}/>
 						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Landscape: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackLandscape}
+								onChange={(event) => this.changeProperty(event, "attackLandscape")}>
+								{this.props.options.dictionaries.landscape.map((item, index) => (
+									<option value={index}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Support Ally Count: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackSupportAllyCount}
+								onChange={(event) => this.changeProperty(event, "attackSupportAllyCount")}>
+								{[0, 1, 2, 3, 4].map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Support Enemy Count: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackSupportEnemyCount}
+								onChange={(event) => this.changeProperty(event, "attackSupportEnemyCount")}>
+								{[0, 1, 2, 3, 4].map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
 					</div>
 					<div>
 						<div className="Editor-container">
@@ -277,17 +342,39 @@ class DamageTable extends Component {
 								value={this.state.defendHp}
 								onChange={(event) => this.changeProperty(event, "defendHp")}/>
 						</div>
-					</div>
-					<div className="Editor-container">
-						<div className="Editor-container-element">Landscape: </div>
-						<select
-							className="Editor-input"
-							value={this.state.currentLandscape}
-							onChange={(event) => this.changeProperty(event, "currentLandscape")}>
-							{this.props.options.dictionaries.landscape.map((item, index) => (
-								<option value={index}>{item}</option>
-							))}
-						</select>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Landscape: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendLandscape}
+								onChange={(event) => this.changeProperty(event, "defendLandscape")}>
+								{this.props.options.dictionaries.landscape.map((item, index) => (
+									<option value={index}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Support Ally Count: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendSupportAllyCount}
+								onChange={(event) => this.changeProperty(event, "defendSupportAllyCount")}>
+								{[0, 1, 2, 3, 4].map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Support Enemy Count: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendSupportEnemyCount}
+								onChange={(event) => this.changeProperty(event, "defendSupportEnemyCount")}>
+								{[0, 1, 2, 3, 4].map((item, index) => (
+									<option value={item}>{item}</option>
+								))}
+							</select>
+						</div>
 					</div>
 				</div>
 				<table className="Damage-table">
