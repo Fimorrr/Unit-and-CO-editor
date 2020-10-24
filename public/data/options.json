@@ -13,6 +13,10 @@
 			"type": "enum"
 		},
 		{
+			"name": "division",
+			"type": "enum"
+		},
+		{
 			"name": "baseDefence",
 			"type": "int"
 		},
@@ -58,10 +62,6 @@
 		},
 		{
 			"name":"bounty",
-			"type": "int"
-		},
-		{
-			"name":"flyCoef",
 			"type": "int"
 		},
 		{
@@ -133,6 +133,10 @@
 			"type": "int"
 		},
 		{
+			"name": "captureProgressBonus",
+			"type": "int"
+		},
+		{
 			"name": "allySupportAttackBonus",
 			"type": "int"
 		},
@@ -173,7 +177,43 @@
 			"type": "int"
 		},
 		{
-			"name": "captureProgressBonus",
+			"name": "infantryAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "infantryDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "techAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "techDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "shipAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "shipDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "planeAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "planeDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "monsterAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "monsterDefenceBonus",
 			"type": "int"
 		}
 	],
@@ -217,6 +257,13 @@
 			"plain",
 			"wood",
 			"city"
+		],
+		"division": [
+			"infantry",
+			"tech",
+			"ship",
+			"plane",
+			"monster"
 		]
 	}
 }

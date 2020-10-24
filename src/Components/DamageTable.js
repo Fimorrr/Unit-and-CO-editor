@@ -96,7 +96,6 @@ class DamageTable extends Component {
 
 		let defence = defendUnit.baseDefence;
 		
-		let flyCoef = 1;
 		let bloodlustAttackCoef = 1;
 		let bloodlustDefenceCoef = 1;
 		let landscapeAttackCoef = 1;
@@ -105,6 +104,8 @@ class DamageTable extends Component {
 		let allyDefenceSupportCoef = 1;
 		let enemyAttackSupportCoef = 1;
 		let enemyDefenceSupportCoef = 1;
+		let divisionAttackCoef = 1;
+		let divisionDefenceCoef = 1;
 
 		if (attackHp <= 50) {
 			bloodlustAttackCoef += attackUnit.bloodlustAttackBonus / 100;
@@ -139,19 +140,52 @@ class DamageTable extends Component {
 		enemyAttackSupportCoef += this.state.attackSupportEnemyCount * attackUnit.enemySupportAttackBonus / 100;
 		enemyDefenceSupportCoef -= this.state.defendSupportEnemyCount * defendUnit.enemySupportDefenceBonus / 100;
 
-		if (defendUnit.movementType === this.getDictionaryIndex("movementType", "flying")) {
+		switch (defendUnit.division) {
+			case this.getDictionaryIndex("division", "infantry"):
+				divisionAttackCoef += attackUnit.infantryAttackBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "tech"):
+				divisionAttackCoef += attackUnit.techAttackBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "ship"):
+				divisionAttackCoef += attackUnit.shipAttackBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "plane"):
+				divisionAttackCoef += attackUnit.planeAttackBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "monster"):
+				divisionAttackCoef += attackUnit.monsterAttackBonus / 100;
+				break;
+		}
+
+		switch (attackUnit.division) {
+			case this.getDictionaryIndex("division", "infantry"):
+				divisionDefenceCoef -= defendUnit.infantryDefenceBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "tech"):
+				divisionDefenceCoef -= defendUnit.techDefenceBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "ship"):
+				divisionDefenceCoef -= defendUnit.shipDefenceBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "plane"):
+				divisionDefenceCoef -= defendUnit.planeDefenceBonus / 100;
+				break;
+			case this.getDictionaryIndex("division", "monster"):
+				divisionDefenceCoef -= defendUnit.monsterDefenceBonus / 100;
+				break;
+		}
+
+		if (defendUnit.division === this.getDictionaryIndex("division", "plane")) {
 			if (!attackUnit.canAttackHighAir && defendUnit.isHighAir) {
 				return "-";
-			}
-			else if (attackUnit.canAttackFly) {
-				flyCoef = attackUnit.flyCoef / 100;
 			}
 			else if (!attackUnit.canAttackFly) {
 				return "-";
 			}
 		}
 
-		let attackCoef = flyCoef * bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef;
+		let attackCoef = bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef *divisionAttackCoef * divisionDefenceCoef;
 
 		if (attackUnit.uAttack > 0) {
 			attack *= attackUnit.uAttack / 10 * ammo * attackCoef;
