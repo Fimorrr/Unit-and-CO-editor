@@ -19,11 +19,13 @@ class App extends Component {
         dictionaries: {}
       },
       units: {},
+      power: {},
       upgrades: {},
       currentUnitName: "Infantry",
       currentCOName: "Origin",
       currentFractionName: "League",
       currentUpgradeID: -1,
+      isPowerSelect: false,
       isJsonInit: false
     };
 
@@ -59,6 +61,10 @@ class App extends Component {
         units: {
           ...this.state.units,
           [coName]: {}
+        },
+        power: {
+          ...this.state.power,
+          [coName]: {}
         }
       }));
     });
@@ -73,7 +79,17 @@ class App extends Component {
                 ...this.state.units[coName],
                 [unitName]: {
                   ...this.state.units[coName][unitName],
-                  [unitProperty.name]: this.getInitUnitObject(data, coName, unitName, unitProperty)
+                  [unitProperty.name]: this.getInitUnitObject(data, "units", coName, unitName, unitProperty)
+                }
+              }
+            },
+            power: {
+              ...this.state.power,
+              [coName]: {
+                ...this.state.power[coName],
+                [unitName]: {
+                  ...this.state.power[coName][unitName],
+                  [unitProperty.name]: this.getInitUnitObject(data, "power", coName, unitName, unitProperty)
                 }
               }
             }
@@ -111,17 +127,17 @@ class App extends Component {
     }));
   }
 
-  getInitUnitObject = (data, coName, unitName, unitProperty) => {
+  getInitUnitObject = (data, typeName, coName, unitName, unitProperty) => {
     var initProperty = {
       value: this.getInitValue(unitProperty.type),
       hasValue: false
     };
 
-    if (data === null) {
+    if (data === null || data[typeName] == null) {
       return initProperty;
     }
 
-    let unit = data.units.find((item) => item.coName === coName && item.unitName === unitName);
+    let unit = data[typeName].find((item) => item.coName === coName && item.unitName === unitName);
     if (!unit || !unit.stats[unitProperty.name]) {
       return initProperty;
     }
@@ -173,7 +189,7 @@ class App extends Component {
     }
   }
 
-  changeJson = (event, propertyName, isProperty, upgradeNumber) => {
+  changeJson = (event, typeName, propertyName, isProperty, upgradeNumber) => {
     let fieldName = "value";
 
     if (!isProperty) {
@@ -209,14 +225,15 @@ class App extends Component {
     }
     else {
       this.setState(() => ({
-        units: {
-          ...this.state.units,
+        //units или power
+        [typeName]: {
+          ...this.state[typeName],
           [this.state.currentCOName]: {
-            ...this.state.units[this.state.currentCOName],
+            ...this.state[typeName][this.state.currentCOName],
             [this.state.currentUnitName]: {
-              ...this.state.units[this.state.currentCOName][this.state.currentUnitName],
+              ...this.state[typeName][this.state.currentCOName][this.state.currentUnitName],
               [propertyName]: {
-                ...this.state.units[this.state.currentCOName][this.state.currentUnitName][propertyName],
+                ...this.state[typeName][this.state.currentCOName][this.state.currentUnitName][propertyName],
                 [fieldName]: inputValue
               }
             }
@@ -315,13 +332,9 @@ class App extends Component {
   }
 
   generateJson = () => {
-    /*let exportObject = {
-      units: this.state.units,
-      upgrades: this.state.upgrades
-    };*/
-
     let exportObject = {
       units: [],
+      power: [],
       upgrades: []
     };
 
@@ -333,6 +346,11 @@ class App extends Component {
           "coName": coName,
           "unitName": unitName,
           "stats": this.state.units[coName][unitName]
+        });
+        exportObject.power.push({
+          "coName": coName,
+          "unitName": unitName,
+          "stats": this.state.power[coName][unitName]
         });
       });
     });
@@ -369,7 +387,8 @@ class App extends Component {
     }
     else if (type === "co") {
       this.setState(() => ({
-        currentCOName: name
+        currentCOName: name,
+        isPowerSelect: (name === "Origin") ? false : this.state.isPowerSelect
       }));
     }
     else if (type === "fraction") {
@@ -381,6 +400,11 @@ class App extends Component {
     else if (type === "upgrade") {
       this.setState(() => ({
         currentUpgradeID: name
+      }));
+    }
+    else if (type === "power") {
+      this.setState(() => ({
+        isPowerSelect: name
       }));
     }
   }
@@ -437,12 +461,15 @@ class App extends Component {
           </div>
           <Editor
             isJsonInit={this.state.isJsonInit}
+            isPowerSelect={this.state.isPowerSelect}
             unitName={this.state.currentUnitName}
             coName={this.state.currentCOName}
             properties={this.state.options.unitProperties}
             units={this.state.units[this.state.currentCOName]}
+            power={this.state.power[this.state.currentCOName]}
             dictionaries={this.state.options.dictionaries}
             originUnits={this.state.units["Origin"]}
+            changeCurrentName={this.changeCurrentName}
             changeJson={this.changeJson}
           />
         </div>

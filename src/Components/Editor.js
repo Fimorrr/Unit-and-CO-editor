@@ -10,6 +10,8 @@ function Editor(props) {
   let unitImgSrc = "../resources/units/" + props.unitName + ".png";
   let coImgSrc = "../resources/co/" + props.coName + ".png";
 
+  let typeName = props.isPowerSelect ? "power" : "units";
+
   return (
     <div className="App-container-block-editor">
       <div className="Editor-header">
@@ -22,6 +24,16 @@ function Editor(props) {
           <img src={coImgSrc} width="100px" height="100px" />
         </div>
       </div>
+      {props.coName === "Origin" ? "" :
+        (<div className="Editor-container">
+          <div className="Editor-container-element">CO Power: </div>
+          <input 
+            className="Editor-input"
+            type="checkbox" 
+            checked={props.isPowerSelect}
+            onChange={(event) => props.changeCurrentName(event.target.checked, "power")}/>
+        </div>)
+      }
       <ul>
         {props.properties.map((item, index) => (
           <EditorElement
@@ -29,9 +41,10 @@ function Editor(props) {
             propertyName={item.name}
             propertyType={item.type}
             dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
-            property={props.units[props.unitName][item.name]}
-            originProperty={props.originUnits[props.unitName][item.name]}
+            property={props[typeName][props.unitName][item.name]}
+            originProperty={props.isPowerSelect ? {value: ""} : props.originUnits[props.unitName][item.name]}
             upgradeNumber={-1}
+            typeName={typeName}
             changeJson={props.changeJson}
           />
         ))}

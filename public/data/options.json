@@ -213,7 +213,11 @@
 			"type": "int"
 		},
 		{
-			"name": "monsterDefenceBonus",
+			"name": "passedCellsAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "passedCellsDefenceBonus",
 			"type": "int"
 		}
 	],
@@ -227,7 +231,8 @@
 		"Armored car",
 		"Artillery",
 		"Tank",
-		"Bomber"
+		"Bomber",
+		"Gaunt"
 	],
 	"coNames": [
 		"Origin",
