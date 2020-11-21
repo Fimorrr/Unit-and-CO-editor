@@ -157,7 +157,7 @@ class DamageTable extends Component {
 				divisionAttackCoef += attackUnit.monsterAttackBonus / 100;
 				break;
 		}
-
+		
 		switch (attackUnit.division) {
 			case this.getDictionaryIndex("division", "infantry"):
 				divisionDefenceCoef -= defendUnit.infantryDefenceBonus / 100;
@@ -182,6 +182,10 @@ class DamageTable extends Component {
 			}
 			else if (!attackUnit.canAttackFly) {
 				return "-";
+			}
+
+			if (attackUnit.isAntiAir) {
+				divisionDefenceCoef = 1;
 			}
 		}
 

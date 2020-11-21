@@ -97,6 +97,10 @@
 			"type": "bool"
 		},
 		{
+			"name": "isAntiAir",
+			"type": "bool"
+		},
+		{
 			"name": "vampireHeal",
 			"type": "int"
 		},
@@ -231,6 +235,9 @@
 		"Armored car",
 		"Artillery",
 		"Tank",
+		"Zeppelin",
+		"Warbird",
+		"Fighter",
 		"Bomber",
 		"Gaunt"
 	],
