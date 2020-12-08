@@ -240,7 +240,8 @@
 		"Fighter",
 		"Bomber",
 		"Gaunt",
-		"Thug"
+		"Thug",
+		"Flak"
 	],
 	"coNames": [
 		"Origin",
