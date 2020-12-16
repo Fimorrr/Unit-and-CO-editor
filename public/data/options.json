@@ -17,6 +17,10 @@
 			"type": "enum"
 		},
 		{
+			"name": "buildBy",
+			"type": "enum"
+		},
+		{
 			"name": "baseDefence",
 			"type": "int"
 		},
@@ -278,6 +282,14 @@
 			"ship",
 			"plane",
 			"monster"
+		],
+		"buildBy" : [
+			"barracks",
+			"factory",
+			"scrapworks",
+			"airport",
+			"seaport",
+			"rift"
 		]
 	}
 }
