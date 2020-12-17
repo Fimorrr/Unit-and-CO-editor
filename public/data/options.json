@@ -221,6 +221,10 @@
 			"type": "int"
 		},
 		{
+			"name": "monsterDefenceBonus",
+			"type": "int"
+		},
+		{
 			"name": "passedCellsAttackBonus",
 			"type": "int"
 		},
