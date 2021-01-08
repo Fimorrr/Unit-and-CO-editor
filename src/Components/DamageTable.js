@@ -106,6 +106,8 @@ class DamageTable extends Component {
 		let enemyDefenceSupportCoef = 1;
 		let divisionAttackCoef = 1;
 		let divisionDefenceCoef = 1;
+		let overallAttackCoef = 1;
+		let overallDefenceCoef = 1;
 
 		if (attackHp <= 50) {
 			bloodlustAttackCoef += attackUnit.bloodlustAttackBonus / 100;
@@ -189,7 +191,10 @@ class DamageTable extends Component {
 			}
 		}
 
-		let attackCoef = bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef *divisionAttackCoef * divisionDefenceCoef;
+		overallAttackCoef -= attackUnit.overallAttackBonus / 100;
+		overallDefenceCoef -= defendUnit.overallDefenceBonus / 100;
+
+		let attackCoef = bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef *divisionAttackCoef * divisionDefenceCoef * overallAttackCoef * overallDefenceCoef;
 
 		if (attackUnit.uAttack > 0) {
 			attack *= attackUnit.uAttack / 10 * ammo * attackCoef;

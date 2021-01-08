@@ -185,6 +185,14 @@
 			"type": "int"
 		},
 		{
+			"name": "overallAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "overallDefenceBonus",
+			"type": "int"
+		},
+		{
 			"name": "infantryAttackBonus",
 			"type": "int"
 		},
@@ -249,7 +257,9 @@
 		"Bomber",
 		"Gaunt",
 		"Thug",
-		"Flak"
+		"Flak",
+		"Obelisk",
+		"Immortal"
 	],
 	"coNames": [
 		"Origin",
@@ -285,7 +295,8 @@
 			"tech",
 			"ship",
 			"plane",
-			"monster"
+			"monster",
+			"none"
 		],
 		"buildBy" : [
 			"barracks",
@@ -293,7 +304,8 @@
 			"scrapworks",
 			"airport",
 			"seaport",
-			"rift"
+			"rift",
+			"none"
 		]
 	}
 }
