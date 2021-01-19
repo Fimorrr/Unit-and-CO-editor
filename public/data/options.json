@@ -77,6 +77,10 @@
 			"type": "bool"
 		},
 		{
+			"name":"canRankUp",
+			"type": "bool"
+		},
+		{
 			"name":"canMoveAfterBuild",
 			"type": "bool"
 		},
