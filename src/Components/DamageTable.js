@@ -10,12 +10,14 @@ class DamageTable extends Component {
 			attackFraction: "League",
 			attackHp: 100,
 			attackLandscape: 0,
+			attackRank: 0,
 			attackSupportAllyCount: 0,
 			attackSupportEnemyCount: 0,
 			defendCO: "Origin",
 			defendFraction: "League",
 			defendHp: 100,
 			defendLandscape: 0,
+			defendRank: 0,
 			defendSupportAllyCount: 0,
 			defendSupportEnemyCount: 0,
 		}
@@ -193,7 +195,7 @@ class DamageTable extends Component {
 			}
 		}
 
-		switch (attackUnit.rank) {
+		switch (parseInt(this.state.attackRank)) {
 			case this.getDictionaryIndex("rank", "level1"):
 				rankAttackCoef += 5 / 100;
 				break;
@@ -205,7 +207,7 @@ class DamageTable extends Component {
 				break;
 		}
 
-		switch (defendUnit.rank) {
+		switch (parseInt(this.state.defendRank)) {
 			case this.getDictionaryIndex("rank", "level1"):
 				rankDefenceCoef -= 5 / 100;
 				break;
@@ -361,6 +363,17 @@ class DamageTable extends Component {
 							</select>
 						</div>
 						<div className="Editor-container">
+							<div className="Editor-container-element">Rank: </div>
+							<select
+								className="Editor-input"
+								value={this.state.attackRank}
+								onChange={(event) => this.changeProperty(event, "attackRank")}>
+								{this.props.options.dictionaries.rank.map((item, index) => (
+									<option value={index}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
 							<div className="Editor-container-element">Support Ally Count: </div>
 							<select
 								className="Editor-input"
@@ -421,6 +434,17 @@ class DamageTable extends Component {
 								value={this.state.defendLandscape}
 								onChange={(event) => this.changeProperty(event, "defendLandscape")}>
 								{this.props.options.dictionaries.landscape.map((item, index) => (
+									<option value={index}>{item}</option>
+								))}
+							</select>
+						</div>
+						<div className="Editor-container">
+							<div className="Editor-container-element">Rank: </div>
+							<select
+								className="Editor-input"
+								value={this.state.defendRank}
+								onChange={(event) => this.changeProperty(event, "defendRank")}>
+								{this.props.options.dictionaries.rank.map((item, index) => (
 									<option value={index}>{item}</option>
 								))}
 							</select>

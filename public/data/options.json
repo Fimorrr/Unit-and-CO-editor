@@ -17,10 +17,6 @@
 			"type": "enum"
 		},
 		{
-			"name": "rank",
-			"type": "enum"
-		},
-		{
 			"name": "buildBy",
 			"type": "enum"
 		},
