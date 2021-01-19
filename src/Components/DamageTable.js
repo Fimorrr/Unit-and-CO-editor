@@ -106,6 +106,8 @@ class DamageTable extends Component {
 		let enemyDefenceSupportCoef = 1;
 		let divisionAttackCoef = 1;
 		let divisionDefenceCoef = 1;
+		let rankAttackCoef = 1;
+		let rankDefenceCoef = 1;
 		let overallAttackCoef = 1;
 		let overallDefenceCoef = 1;
 
@@ -191,10 +193,34 @@ class DamageTable extends Component {
 			}
 		}
 
-		overallAttackCoef -= attackUnit.overallAttackBonus / 100;
+		switch (attackUnit.rank) {
+			case this.getDictionaryIndex("rank", "level1"):
+				rankAttackCoef += 5 / 100;
+				break;
+			case this.getDictionaryIndex("rank", "level2"):
+				rankAttackCoef += 10 / 100;
+				break;
+			case this.getDictionaryIndex("rank", "level3"):
+				rankAttackCoef += 20 / 100;
+				break;
+		}
+
+		switch (defendUnit.rank) {
+			case this.getDictionaryIndex("rank", "level1"):
+				rankDefenceCoef -= 5 / 100;
+				break;
+			case this.getDictionaryIndex("rank", "level2"):
+				rankDefenceCoef -= 10 / 100;
+				break;
+			case this.getDictionaryIndex("rank", "level3"):
+				rankDefenceCoef -= 20 / 100;
+				break;
+		}
+
+		overallAttackCoef += attackUnit.overallAttackBonus / 100;
 		overallDefenceCoef -= defendUnit.overallDefenceBonus / 100;
 
-		let attackCoef = bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef *divisionAttackCoef * divisionDefenceCoef * overallAttackCoef * overallDefenceCoef;
+		let attackCoef = bloodlustAttackCoef * bloodlustDefenceCoef * landscapeAttackCoef * landscapeDefenceCoef * allyAttackSupportCoef * allyDefenceSupportCoef * enemyAttackSupportCoef * enemyDefenceSupportCoef *divisionAttackCoef * divisionDefenceCoef * overallAttackCoef * overallDefenceCoef * rankAttackCoef * rankDefenceCoef;
 
 		if (attackUnit.uAttack > 0) {
 			attack *= attackUnit.uAttack / 10 * ammo * attackCoef;
@@ -245,7 +271,10 @@ class DamageTable extends Component {
 			}
 		}
 
-		attack = attack * (120 - defence * this.getDigit(defendHp)) / 100;
+		//attack = attack * (120 - defence * this.getDigit(defendHp)) / 100;
+		var digit = this.getDigit(defendHp);
+		var defenceCoef = (1.2 - Math.min(1, defence / 15)) * (0.98 + (0.2 / digit));
+		attack = attack * defenceCoef;
 
 		return  parseInt(attack);
 	}

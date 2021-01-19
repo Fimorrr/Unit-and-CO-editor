@@ -17,6 +17,10 @@
 			"type": "enum"
 		},
 		{
+			"name": "rank",
+			"type": "enum"
+		},
+		{
 			"name": "buildBy",
 			"type": "enum"
 		},
@@ -297,6 +301,12 @@
 			"plane",
 			"monster",
 			"none"
+		],
+		"rank": [
+			"none",
+			"level1",
+			"level2",
+			"level3"
 		],
 		"buildBy" : [
 			"barracks",
