@@ -4,6 +4,7 @@ import UpgradeEditor from './Components/UpgradeEditor'
 import UnitList from './Components/UnitList';
 import UpgradeList from './Components/UpgradeList';
 import DamageTable from './Components/DamageTable';
+import CodeGenerator from './CodeGenerator'
 import './App.css';
 
 class App extends Component {
@@ -331,6 +332,10 @@ class App extends Component {
     console.log(this.state);
   }
 
+  generateClass = () => {
+    CodeGenerator(this.state.options.unitProperties);
+  }
+
   generateJson = () => {
     let exportObject = {
       units: [],
@@ -473,6 +478,7 @@ class App extends Component {
             changeJson={this.changeJson}
           />
         </div>
+        <button onClick={this.generateClass}>Generate C# Class</button>
         <button onClick={this.generateJson}>Download JSON</button>
         <DamageTable
           isJsonInit={this.state.isJsonInit}

@@ -109,6 +109,42 @@
 			"type": "bool"
 		},
 		{
+			"name": "canInverseLoad",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterInverseLoad",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterUnload",
+			"type": "bool"
+		},
+		{
+			"name": "canMergeWithDivision",
+			"type": "bool"
+		},
+		{
+			"name": "infantryHeal",
+			"type": "int"
+		},
+		{
+			"name": "techHeal",
+			"type": "int"
+		},
+		{
+			"name": "shipHeal",
+			"type": "int"
+		},
+		{
+			"name": "planeHeal",
+			"type": "int"
+		},
+		{
+			"name": "monsterHeal",
+			"type": "int"
+		},
+		{
 			"name": "vampireHeal",
 			"type": "int"
 		},
