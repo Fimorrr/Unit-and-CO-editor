@@ -209,12 +209,19 @@ public class UpgradedBy
 }
 
 function getAddStats(unitProperty) {
-    let row = "\n" + unitProperty.name + ".value = upgrade.unitProperties." + unitProperty.name + ".value;";
+    let row = "\n" + unitProperty.name;
 
     switch(unitProperty.type) {
         case "enum":
+            row += ".value = upgrade.unitProperties." + unitProperty.name + ".value;";
             return "\nif (upgrade.unitProperties." + unitProperty.name + ".hasValue)\n{" + row + "\n}";
+        case "int":
+            row += " = upgrade.unitProperties." + unitProperty.name;
+            row += ".getAddObject(" + unitProperty.name + ", upgrade, overwrite);";
+            return row;
         default:
+            row += ".value = upgrade.unitProperties." + unitProperty.name;
+            row += ".getAddValue(" + unitProperty.name + ".value);";
             return row;
     }
 }
