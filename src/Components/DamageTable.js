@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class DamageTable extends Component {
-  constructor(props) {
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -310,7 +310,7 @@ class DamageTable extends Component {
 		);
 	}
 
-  render() {
+	render() {
 		if (!this.props.isJsonInit) {
 			return "";
 		}

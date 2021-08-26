@@ -50,6 +50,7 @@ class App extends Component {
     this.changeCurrentName = this.changeCurrentName.bind(this);
     this.deleteUpgradeItem = this.deleteUpgradeItem.bind(this);  
     this.addUpgradeItem = this.addUpgradeItem.bind(this);
+    this.moveUpgradeItem = this.moveUpgradeItem.bind(this);
     this.changeUpgradeProperty = this.changeUpgradeProperty.bind(this);
   }
 
@@ -332,6 +333,48 @@ class App extends Component {
     console.log(this.state);
   }
 
+  changeUpgradeIndex = (indexOld, indexNew) => {
+    let copyUnits = [...this.state.upgrades[this.state.currentFractionName][this.state.currentUnitName]];
+    //copyUnits[upgradeNumber][upgradePropertyName] = inputValue;
+
+    copyUnits.splice(indexNew, 0, copyUnits.splice(indexOld, 1)[0]);
+
+    this.setState(() => ({
+      upgrades: {
+        ...this.state.upgrades,
+        [this.state.currentFractionName]: {
+          ...this.state.upgrades[this.state.currentFractionName],
+          [this.state.currentUnitName]: copyUnits
+        }
+      }
+    }));
+  }
+
+  moveUpgradeItem = (itemNumber, rowNumber, direction) => {
+    switch (direction) {
+      case "up":
+        this.changeUpgradeProperty({
+          target: {
+            value: Math.max(0, rowNumber - 1)
+          }
+        }, itemNumber, "rowNumber");
+        break;
+      case "down":
+        this.changeUpgradeProperty({
+          target: {
+            value: rowNumber + 1
+          }
+        }, itemNumber, "rowNumber");
+        break;
+      case "left":
+        this.changeUpgradeIndex(itemNumber, itemNumber - 1);
+        break;
+      case "right":
+        this.changeUpgradeIndex(itemNumber, itemNumber + 1);
+        break;
+    }
+  }
+
   generateClass = () => {
     CodeGenerator(this.state.options.unitProperties);
   }
@@ -462,6 +505,7 @@ class App extends Component {
               changeUpgradeProperty={this.changeUpgradeProperty}
               changeCurrentName={this.changeCurrentName}
               changeJson={this.changeJson}
+              moveUpgradeItem={this.moveUpgradeItem}
             />
           </div>
           <Editor

@@ -279,6 +279,162 @@
 		{
 			"name": "passedCellsDefenceBonus",
 			"type": "int"
+		},
+		{
+			"name": "ammoAfterKillBonus",
+			"type": "int"
+		},
+		{
+			"name": "passedCellsVampireBonus",
+			"type": "int"
+		},
+		{
+			"name": "counterAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "counterDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackCount",
+			"type": "int"
+		},
+		{
+			"name": "attackSeparateFromMove",
+			"type": "bool"
+		},
+		{
+			"name": "moveFullMovement",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterAttack",
+			"type": "bool"
+		},
+		{
+			"name": "refreshMoveAfterKill",
+			"type": "bool"
+		},
+		{
+			"name": "lastTurnMovedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnNotAttackedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnNotAttackedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullHpAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullHpDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "hpOfSpawnUnit",
+			"type": "int"
+		},
+		{
+			"name": "passengerSurvive",
+			"type": "bool"
+		},
+		{
+			"name": "maxDamageTaken",
+			"type": "int"
+		},
+		{
+			"name": "maxDamageGiven",
+			"type": "int"
+		},
+		{
+			"name": "baseDefenceIgnorePercent",
+			"type": "int"
+		},
+		{
+			"name": "landscapeDefenceIgnorePercent",
+			"type": "int"
+		},
+		{
+			"name": "singleAllySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "singleAllySupportDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "buildingAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "buildingDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "defenceHpScale",
+			"type": "int"
+		},
+		{
+			"name": "ignoreRoadDefence",
+			"type": "bool"
+		},
+		{
+			"name": "ignorePlainDefence",
+			"type": "bool"
+		},
+		{
+			"name": "ignoreRockDefence",
+			"type": "bool"
+		},
+		{
+			"name": "ignoreBuildingDefence",
+			"type": "bool"
+		},
+		{
+			"name": "attackHpScale",
+			"type": "int"
+		},
+		{
+			"name": "attackHpStart",
+			"type": "int"
+		},
+		{
+			"name": "isIndirect",
+			"type": "bool"
+		},
+		{
+			"name": "indirectAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "indirectDefenceBonus",
+			"type": "int"
 		}
 	],
 	"unitNames": [

@@ -94,6 +94,10 @@ li {
   text-decoration:underline;
 }
 
+.Button-selected {
+  color:red;
+}
+
 .Upgrade-row {
   width: 100%;
   justify-content: center;
