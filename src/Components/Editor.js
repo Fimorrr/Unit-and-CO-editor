@@ -8,8 +8,17 @@ class Editor extends Component {
 		super(props);
 
 		this.state = {
-      filters: {}
+      filters: {},
+      search: ""
     };
+  }
+
+  changeSearch = (event) => {
+    let inputValue = event.target.value;
+
+    this.setState(() => ({
+      search: inputValue
+    }));
   }
 
   render() {
@@ -24,7 +33,9 @@ class Editor extends Component {
 
     let typeName = props.isPowerSelect ? "power" : "units";
 
-    let properties = props.properties;
+    let properties = props.properties.filter((property) => (
+      property.name.toLowerCase().includes(this.state.search.toLowerCase())
+    ));
 
     return (
       <div className="App-container-block-editor">
@@ -48,6 +59,13 @@ class Editor extends Component {
               onChange={(event) => props.changeCurrentName(event.target.checked, "power")}/>
           </div>)
         }
+        <div className="Editor-container">
+          <div className="Editor-container-element">Search: </div>
+            <input 
+              className="Editor-input"
+              value={this.state.search}
+              onChange={this.changeSearch}/>
+        </div>
         <FilterPanel/>
         <ul>
           {properties.map((item, index) => (
