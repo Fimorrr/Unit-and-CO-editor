@@ -476,7 +476,7 @@ class App extends Component {
               changeCurrentName={this.changeCurrentName}
             />
           </div>
-          <div className="App-container-block">
+          <div className="App-container-block-middle">
             <UnitList
               names={this.state.options.fractionNames}
               type="fraction"
@@ -492,6 +492,7 @@ class App extends Component {
               deleteUpgradeItem={this.deleteUpgradeItem}
               addUpgradeItem={this.addUpgradeItem}
               changeCurrentName={this.changeCurrentName}
+              currentUpgradeID={this.state.currentUpgradeID}
               changeUpgradeProperty={this.changeUpgradeProperty}
             />
             <UpgradeEditor

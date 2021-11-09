@@ -40,11 +40,11 @@ class Editor extends Component {
     return (
       <div className="App-container-block-editor">
         <div className="Editor-header">
-          <div className="Editor-header-element">
+          <div className="Editor-header-element-left">
             <div>{props.unitName}</div>
             <img src={unitImgSrc} width="100px" height="100px" />
           </div>
-          <div className="Editor-header-element">
+          <div className="Editor-header-element-right">
             <div>{props.coName}</div>
             <img src={coImgSrc} width="100px" height="100px" />
           </div>

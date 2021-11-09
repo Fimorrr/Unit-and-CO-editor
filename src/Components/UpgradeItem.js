@@ -12,17 +12,42 @@ function UpgradeItem(props) {
 
 	return (
 		<div className="Upgrade-item">
-			<div className={props.item.selected ? "Upgrade-item-selected" : ""} onClick={() => props.changeCurrentName(props.item.itemID, "upgrade")}>
-			{props.item.itemName} ({props.item.itemID})
+			<div className="Upgrade-item-header">
+				<div
+					className={"Upgrade-item-header-text Like-link " + (props.item.itemID === props.currentUpgradeID ? "Upgrade-item-selected Upgrade" : "")}
+					onClick={() => props.changeCurrentName(props.item.itemID, "upgrade")}
+				>
+					{props.item.itemName}
+				</div>
+				<input 
+					type="checkbox" 
+					checked={props.item.selected} 
+					onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "selected")}/>
+				<button
+					onClick={() => props.deleteUpgradeItem(props.item.itemID)}
+					className="Upgrade-item-delete"
+				>x</button>
 			</div>
-			<input 
-				type="checkbox" 
-				checked={props.item.selected} 
-				onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "selected")}/>
-			<button
-				onClick={() => props.deleteUpgradeItem(props.item.itemID)}
-				className="Upgrade-item-delete"
-			>x</button>
+			<div
+				className="Upgrade-item-body"
+				onClick={() => props.changeCurrentName(props.item.itemID, "upgrade")}
+			>
+				<div className="Upgrade-item-image-container">
+					<div
+						style={{
+							width: "180px",
+							height: "40px",
+							marginRight: "10px",
+							objectFit: "contain",
+							background: "no-repeat url(../resources/icons/icons_league_land.png)",
+							backgroundSize: "cover",
+							backgroundPositionX: `${-30 * (props.item.icon % 6)}px`,
+							backgroundPositionY: `${-30 * parseInt(props.item.icon / 6)}px`
+						}}
+					/>
+				</div>
+				<div>id: {props.item.itemID}, icon: {props.item.icon}, price: {props.item.price}</div>
+			</div>	
 		</div>
 	);
 }

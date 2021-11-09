@@ -54,7 +54,7 @@ class FilterPanel extends Component {
 
     render() {
         return (
-            <div>
+            <div class="Filter-panel-container">
                 <div>Filter panel</div>
                 {
                     this.state.filterCategories.map((categorie, categorieNumber) => {

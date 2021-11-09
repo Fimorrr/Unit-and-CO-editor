@@ -17,6 +17,7 @@ function UpgradeRow(props) {
 					item={props.upgradeItems[index]}
 					deleteUpgradeItem={props.deleteUpgradeItem}
 					changeCurrentName={props.changeCurrentName}
+					currentUpgradeID={props.currentUpgradeID}
 					changeUpgradeProperty={props.changeUpgradeProperty}
 				/>
 			))}

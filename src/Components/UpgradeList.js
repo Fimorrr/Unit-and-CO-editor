@@ -33,6 +33,7 @@ function UpgradeList(props) {
 					addUpgradeItem={props.addUpgradeItem}
 					deleteUpgradeItem={props.deleteUpgradeItem}
 					changeCurrentName={props.changeCurrentName}
+					currentUpgradeID={props.currentUpgradeID}
 					changeUpgradeProperty={props.changeUpgradeProperty}
 				/>
 			))}

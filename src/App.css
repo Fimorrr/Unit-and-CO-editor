@@ -42,11 +42,15 @@
 }
 
 .App-container-block {
-  flex: 25%;
+  flex: 20%;
+}
+
+.App-container-block-middle {
+  flex: 35%;
 }
 
 .App-container-block-editor {
-  flex: 50%;
+  flex: 45%;
 }
 
 ul {
@@ -57,12 +61,22 @@ li {
   list-style-type: none; /* Убираем маркеры */
 }
 
-.Editor-header {
-  display: flex;
+.Filter-panel-container {
+  width: 350px;
+  margin: 5px 10% 5px calc(10% + 30px);
 }
 
-.Editor-header-element {
-  flex: 50%;
+.Editor-header {
+  display: flex;
+  margin: 5px 10% 5px 10%;
+}
+
+.Editor-header-element-left {
+  width: 250px;
+}
+
+.Editor-header-element-right {
+  width: 100px;
 }
 
 .Editor-container {
@@ -71,7 +85,7 @@ li {
 }
 
 .Editor-container-element {
-  width: 200px;
+  width: 250px;
 }
 
 .Editor-input {
@@ -80,6 +94,22 @@ li {
   -webkit-box-sizing:border-box; 
   box-sizing:border-box;
   width: 100px;
+}
+
+.Editor-input-container {
+  display: flex;
+}
+
+.Editor-input-small {
+  -ms-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box; 
+  box-sizing:border-box;
+  width: 80px;
+}
+
+.Unit-list {
+  min-width: 200px;
 }
 
 .Like-link {
@@ -106,11 +136,36 @@ li {
 }
 
 .Upgrade-item {
+  width: 180px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   margin-left: 5px;
   margin-right: 5px;
   border: 1px solid black;
+}
+
+.Upgrade-item-header {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.Upgrade-item-header-text {
+  width: 100%;
+}
+
+.Upgrade-item-body {
+  display: flex;
+  align-items: center;
+}
+
+.Upgrade-item-image-container {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
 }
 
 .Upgrade-item-delete {
@@ -124,7 +179,7 @@ li {
 }
 
 .Upgrade-editor {
-  margin-top: 80px;
+  margin-top: 30px;
 }
 
 .Damage-container {

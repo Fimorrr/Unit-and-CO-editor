@@ -63,8 +63,10 @@ class UpgradeEditor extends Component {
 
         return (
             <div className="Upgrade-editor">
-                <button onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
-                <div>Opened Item: {props.currentUpgradeID}</div>
+                <div className="Editor-container">
+                    <div className="Editor-container-element">Opened Item: {props.currentUpgradeID}</div>
+                    <button className="Editor-input" onClick={() => props.changeCurrentName(-1, "upgrade")}>Close</button>
+                </div>
                 <div className="Editor-container">
                     <div className="Editor-container-element">Item Name: </div>
                     <input 
@@ -98,24 +100,27 @@ class UpgradeEditor extends Component {
                         onChange={(event) => props.changeUpgradeProperty(event, itemNumber, "selected")}/>
                 </div>
                 <div className="Editor-container">
-                    <div className="Editor-container-element">
-                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "up")}>^</button>
-                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "down")}>v</button>
-                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "left")}>{"<"}</button>
-                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "right")}>{">"}</button>
+                    <div className="Editor-container-element">Move: </div>
+                    <div className="Editor-input-container">
+                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "up")}>&#8593;</button>
+                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "down")}>&#8595;</button>
+                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "left")}>&#8592;</button>
+                        <button onClick={() => props.moveUpgradeItem(itemNumber, rowNumber, "right")}>&#8594;</button>
                     </div>
                 </div>
                 <div className="Editor-container">
-                    <div className="Editor-container-element">Property: </div>
-                    <select
-                        className="Editor-input"
-                        value={this.state.selectedProperty}
-                        onChange={(event) => this.changeProperty(event)}>
-                        {props.properties.map((item, index) => (
-                            <option value={index}>{item.name}</option>
-                        ))}
-                    </select>
-                    <button onClick={this.addProperty}>Add</button>
+                    <div className="Editor-container-element">Add Property: </div>
+                    <div className="Editor-input-container">
+                        <select
+                            className="Editor-input-small"
+                            value={this.state.selectedProperty}
+                            onChange={(event) => this.changeProperty(event)}>
+                            {props.properties.map((item, index) => (
+                                <option value={index}>{item.name}</option>
+                            ))}
+                        </select>
+                        <button onClick={this.addProperty}>+</button>
+                    </div>
                 </div>
                 <ul>
                     {properties.map((item, index) => (
