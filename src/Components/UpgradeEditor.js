@@ -7,12 +7,14 @@ class UpgradeEditor extends Component {
         super(props);
 
         this.state = {
-            selectedProperty: "0"
+            selectedProperty: "0",
+            searchProperty: ""
         };
 
         this.getItemNumber = this.getItemNumber.bind(this);
         this.changeProperty = this.changeProperty.bind(this);
         this.addProperty = this.addProperty.bind(this);
+        this.changeSearchProperty = this.changeSearchProperty.bind(this);
     }
 
     getItemNumber = () => {
@@ -31,6 +33,14 @@ class UpgradeEditor extends Component {
 
         this.setState(() => ({
             selectedProperty: inputValue
+        }));
+    }
+
+    changeSearchProperty = (event) => {
+        let inputValue = event.target.value;
+
+        this.setState(() => ({
+            searchProperty: inputValue
         }));
     }
 
@@ -57,7 +67,11 @@ class UpgradeEditor extends Component {
         let itemNumber = this.getItemNumber();
         let rowNumber = props.upgrades[props.fractionName][props.unitName][itemNumber].rowNumber;
 
-        let properties = props.properties.filter((property) => {
+        let properties = props.properties.filter((property) => (
+            property.name.toLowerCase().includes(this.state.searchProperty.toLowerCase())
+        ));
+
+        let addedProperties = props.properties.filter((property) => {
             return props.upgrades[props.fractionName][props.unitName][itemNumber]["unitProperties"][property.name].hasValue;
         });
 
@@ -109,13 +123,21 @@ class UpgradeEditor extends Component {
                     </div>
                 </div>
                 <div className="Editor-container">
+                    <div className="Editor-container-element">Search Property: </div>
+                    <input 
+                        className="Editor-input"
+                        type="text" 
+                        value={this.state.searchProperty} 
+                        onChange={(event) => this.changeSearchProperty(event)}/>
+                </div>
+                <div className="Editor-container">
                     <div className="Editor-container-element">Add Property: </div>
                     <div className="Editor-input-container">
                         <select
                             className="Editor-input-small"
                             value={this.state.selectedProperty}
                             onChange={(event) => this.changeProperty(event)}>
-                            {props.properties.map((item, index) => (
+                            {properties.map((item, index) => (
                                 <option value={index}>{item.name}</option>
                             ))}
                         </select>
@@ -123,7 +145,7 @@ class UpgradeEditor extends Component {
                     </div>
                 </div>
                 <ul>
-                    {properties.map((item, index) => (
+                    {addedProperties.map((item, index) => (
                         <EditorElement
                             propertyName={item.name}
                             propertyType={item.type}

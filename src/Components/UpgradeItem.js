@@ -10,6 +10,8 @@ function UpgradeItem(props) {
         }
     });
 
+	let iconImage = props.fractionName == "League" ? "icons_league_land" : "icons_reich_land";
+
 	return (
 		<div className="Upgrade-item">
 			<div className="Upgrade-item-header">
@@ -39,10 +41,7 @@ function UpgradeItem(props) {
 							height: "40px",
 							marginRight: "10px",
 							objectFit: "contain",
-							background: "no-repeat url(../resources/icons/icons_league_land.png)",
-							backgroundSize: "cover",
-							backgroundPositionX: `${-30 * (props.item.icon % 6)}px`,
-							backgroundPositionY: `${-30 * parseInt(props.item.icon / 6)}px`
+							background: `url(../resources/icons/${iconImage}.png) ${-30 * (props.item.icon % 6)}px ${-30 * parseInt(props.item.icon / 6)}px / cover no-repeat`
 						}}
 					/>
 				</div>

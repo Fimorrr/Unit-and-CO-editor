@@ -9,7 +9,8 @@ class Editor extends Component {
 
 		this.state = {
       filters: {},
-      search: ""
+      search: "",
+      showAll: false
     };
   }
 
@@ -18,6 +19,14 @@ class Editor extends Component {
 
     this.setState(() => ({
       search: inputValue
+    }));
+  }
+
+  changeShowAll = (event) => {
+    let inputValue = event.target.checked;
+
+    this.setState(() => ({
+      showAll: inputValue
     }));
   }
 
@@ -60,6 +69,14 @@ class Editor extends Component {
           </div>)
         }
         <div className="Editor-container">
+          <div className="Editor-container-element">Show all: </div>
+            <input 
+              className="Editor-input"
+              type="checkbox"
+              checked={this.state.showAll}
+              onChange={this.changeShowAll}/>
+        </div>
+        <div className="Editor-container">
           <div className="Editor-container-element">Search: </div>
             <input 
               className="Editor-input"
@@ -68,19 +85,25 @@ class Editor extends Component {
         </div>
         <FilterPanel/>
         <ul>
-          {properties.map((item, index) => (
-            <EditorElement
-              coName={props.coName}
-              propertyName={item.name}
-              propertyType={item.type}
-              dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
-              property={props[typeName][props.unitName][item.name]}
-              originProperty={props.isPowerSelect ? {value: ""} : props.originUnits[props.unitName][item.name]}
-              upgradeNumber={-1}
-              typeName={typeName}
-              changeJson={props.changeJson}
-            />
-          ))}
+          {properties.map((item, index) => {
+            if (!this.state.showAll && index > 15) {
+              return "";
+            }
+
+            return (
+              <EditorElement
+                coName={props.coName}
+                propertyName={item.name}
+                propertyType={item.type}
+                dictionary={item.type === "enum" ? props.dictionaries[item.name] : []}
+                property={props[typeName][props.unitName][item.name]}
+                originProperty={props.isPowerSelect ? {value: ""} : props.originUnits[props.unitName][item.name]}
+                upgradeNumber={-1}
+                typeName={typeName}
+                changeJson={props.changeJson}
+              />
+            );
+          })}
         </ul>
       </div>
     );
