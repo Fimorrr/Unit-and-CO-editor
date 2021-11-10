@@ -46,7 +46,12 @@ class UpgradeEditor extends Component {
 
     addProperty = () => {
         let itemNumber = this.getItemNumber();
-        let item = this.props.properties[this.state.selectedProperty];
+
+        let properties = this.props.properties.filter((property) => (
+            property.name.toLowerCase().includes(this.state.searchProperty.toLowerCase())
+        ));
+
+        let item = properties[this.state.selectedProperty];
         let event = {
             target: {
                 type: "checkbox",
