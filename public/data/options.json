@@ -401,6 +401,10 @@
 			"type": "int"
 		},
 		{
+			"name": "defenceHpStart",
+			"type": "int"
+		},
+		{
 			"name": "ignoreRoadDefence",
 			"type": "bool"
 		},
@@ -434,6 +438,70 @@
 		},
 		{
 			"name": "indirectDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackFirstAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackFirstDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "ignoreOverallDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "healAfterKillBonus",
+			"type": "int"
+		},
+		{
+			"name": "thisTurnSuppliedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "thisTurnSuppliedDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "afterDeathSpawnLoadedUnit",
+			"type": "bool"
+		},
+		{
+			"name": "transportedHeal",
+			"type": "int"
+		},
+		{
+			"name": "unloadUnitHasEnhancedDefence",
+			"type": "bool"
+		},
+		{
+			"name": "defenceHpStartCoef",
+			"type": "int"
+		},
+		{
+			"name": "moveRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "defenceRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockOuterRadBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackNotFullHpEnemyBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackEnemyOnBuildingBonus",
 			"type": "int"
 		}
 	],

@@ -36,20 +36,25 @@ class UpgradeEditor extends Component {
         }));
     }
 
+    getFilteredProperties = () => {
+        return this.props.properties.filter((property) => (
+            property.name.toLowerCase().includes(this.state.searchProperty.toLowerCase())
+        ));
+    }
+
     changeSearchProperty = (event) => {
         let inputValue = event.target.value;
 
         this.setState(() => ({
-            searchProperty: inputValue
+            searchProperty: inputValue,
+            selectedProperty: "0"
         }));
     }
 
     addProperty = () => {
         let itemNumber = this.getItemNumber();
 
-        let properties = this.props.properties.filter((property) => (
-            property.name.toLowerCase().includes(this.state.searchProperty.toLowerCase())
-        ));
+        let properties = this.getFilteredProperties();
 
         let item = properties[this.state.selectedProperty];
         let event = {
@@ -59,7 +64,9 @@ class UpgradeEditor extends Component {
             }
         };
 
-        this.props.changeJson(event, "", item.name, false, itemNumber);
+        if (item) {
+            this.props.changeJson(event, "", item.name, false, itemNumber);
+        }
     }
 
     render() {
@@ -72,9 +79,7 @@ class UpgradeEditor extends Component {
         let itemNumber = this.getItemNumber();
         let rowNumber = props.upgrades[props.fractionName][props.unitName][itemNumber].rowNumber;
 
-        let properties = props.properties.filter((property) => (
-            property.name.toLowerCase().includes(this.state.searchProperty.toLowerCase())
-        ));
+        let properties = this.getFilteredProperties();
 
         let addedProperties = props.properties.filter((property) => {
             return props.upgrades[props.fractionName][props.unitName][itemNumber]["unitProperties"][property.name].hasValue;

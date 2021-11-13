@@ -275,7 +275,7 @@ class DamageTable extends Component {
 
 		//attack = attack * (120 - defence * this.getDigit(defendHp)) / 100;
 		var digit = this.getDigit(defendHp);
-		var defenceCoef = (1.2 - Math.min(1, defence / 15)) * (0.98 + (0.2 / digit));
+		var defenceCoef = (1.2 - Math.min(1, defence / 15)) * (1.527 - Math.sqrt(digit) / 6 * (1 + defendUnit.defenceHpScale / 100) - defendUnit.defenceHpStart / 1000);
 		attack = attack * defenceCoef;
 
 		return  parseInt(attack);
