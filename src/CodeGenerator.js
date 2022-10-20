@@ -45,11 +45,23 @@ function CodeGenerator(unitProperties) {
     });
 
     text += "\n}\n";
-    text += `public void addPropertyText(List<string> list, string property, NullableInt value)
+    text += `string getLocalizedText(string property)
+    {
+        var localizedProperty = LeanLocalization.GetTranslationText(property);
+
+        if (localizedProperty == null || localizedProperty == "")
+        {
+            localizedProperty = property;
+        }
+
+        return localizedProperty;
+    }
+
+    public void addPropertyText(List<string> list, string property, NullableInt value)
     {
         if (value.hasValue)
         {
-            var localizedProperty = LeanLocalization.GetTranslationText(property);
+            var localizedProperty = getLocalizedText(property);
             string formattedValue = value.value.ToString();
 
             if (value.value >= 0)
@@ -66,11 +78,20 @@ function CodeGenerator(unitProperties) {
         }
     }
 
+    public void addPropertyText(List<string> list, string property, NullableString value)
+    {
+        if (value.hasValue)
+        {
+            var localizedProperty = getLocalizedText(property);
+            list.Add(localizedProperty + ": " + value.value);
+        }
+    }
+
     public void addPropertyText(List<string> list, string property, NullableBool value)
     {
         if (value.hasValue)
         {
-            var localizedProperty = LeanLocalization.GetTranslationText(property);
+            var localizedProperty = getLocalizedText(property);
             list.Add(localizedProperty + ": " + (value.value ? "Yes" : "No"));
         }
     }
@@ -79,7 +100,7 @@ function CodeGenerator(unitProperties) {
     {
         if (value.hasValue)
         {
-            var localizedProperty = LeanLocalization.GetTranslationText(property);
+            var localizedProperty = getLocalizedText(property);
             list.Add(localizedProperty + " -> " + value.value);
         }
     }
@@ -88,7 +109,7 @@ function CodeGenerator(unitProperties) {
     {
         if (value.hasValue)
         {
-            var localizedProperty = LeanLocalization.GetTranslationText(property);
+            var localizedProperty = getLocalizedText(property);
             list.Add(localizedProperty + " -> " + value.value);
         }
     }
@@ -119,16 +140,17 @@ public class NullableInt
     {
         if (hasValue)
         {
-            var upgradedBy = new UpgradedBy();
-            upgradedBy.iconNumber = upgrade.icon;
-            upgradedBy.upgradeName = upgrade.itemName;
-
             if (overwrite)
             {
                 addObject.value = value;
             }
             else
             {
+                var upgradedBy = new UpgradedBy();
+                upgradedBy.iconNumber = upgrade.icon;
+                upgradedBy.upgradeName = upgrade.itemName;
+                upgradedBy.upgradeDescription = upgrade.unitProperties.getUpgradeText();
+                
                 addObject.value += value;
                 addObject.upgradedBy.Add(upgradedBy);
             }
@@ -201,8 +223,18 @@ public class NullableBuildBy
 [System.Serializable]
 public class UpgradedBy
 {
-    public string upgradeName;
     public int iconNumber;
+    public string upgradeName;
+    public string upgradeDescription;
+}
+
+[System.Serializable]
+public class UpgradedByInfo
+{
+    public UpgradedBy upgradedBy;
+    public int damage;
+    public int deltaDamage;
+    public bool isAttack;
 }`;
 
     console.log(text);

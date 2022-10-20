@@ -61,6 +61,10 @@
 			"type": "int"
 		},
 		{
+			"name":"buildPriority",
+			"type": "int"
+		},
+		{
 			"name":"loadCapacity",
 			"type": "int"
 		},
