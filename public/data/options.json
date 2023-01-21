@@ -173,6 +173,10 @@
 			"type": "int"
 		},
 		{
+			"name": "endTurnDisease",
+			"type": "int"
+		},
+		{
 			"name": "afterDeathSpawnUnit",
 			"type": "string"
 		},
@@ -357,10 +361,6 @@
 			"type": "int"
 		},
 		{
-			"name": "passengerSurvive",
-			"type": "bool"
-		},
-		{
 			"name": "maxDamageTaken",
 			"type": "int"
 		},
@@ -401,36 +401,12 @@
 			"type": "int"
 		},
 		{
-			"name": "defenceHpScale",
-			"type": "int"
-		},
-		{
-			"name": "defenceHpStart",
-			"type": "int"
-		},
-		{
-			"name": "ignoreRoadDefence",
-			"type": "bool"
-		},
-		{
-			"name": "ignorePlainDefence",
-			"type": "bool"
-		},
-		{
 			"name": "ignoreRockDefence",
 			"type": "bool"
 		},
 		{
 			"name": "ignoreBuildingDefence",
 			"type": "bool"
-		},
-		{
-			"name": "attackHpScale",
-			"type": "int"
-		},
-		{
-			"name": "attackHpStart",
-			"type": "int"
 		},
 		{
 			"name": "isIndirect",
@@ -477,14 +453,6 @@
 			"type": "int"
 		},
 		{
-			"name": "unloadUnitHasEnhancedDefence",
-			"type": "bool"
-		},
-		{
-			"name": "defenceHpStartCoef",
-			"type": "int"
-		},
-		{
 			"name": "moveRankBonus",
 			"type": "int"
 		},
@@ -507,6 +475,22 @@
 		{
 			"name": "attackEnemyOnBuildingBonus",
 			"type": "int"
+		},
+		{
+			"name": "unloadedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "unloadedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "unloadedDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "canBorrowAmmoAlly",
+			"type": "bool"
 		}
 	],
 	"unitNames": [
