@@ -491,6 +491,10 @@
 		{
 			"name": "canBorrowAmmoAlly",
 			"type": "bool"
+		},
+		{
+			"name": "canLoadTech",
+			"type": "bool"
 		}
 	],
 	"unitNames": [

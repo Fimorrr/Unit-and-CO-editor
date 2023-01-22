@@ -120,7 +120,7 @@ class DamageTable extends Component {
 			bloodlustDefenceCoef -= defendUnit.bloodlustDefenceBonus / 100;
 		}
 
-		let attack = this.getDigit(attackHp) * (1 + attackUnit.attackHpScale / 100) + attackUnit.attackHpStart;
+		let attack = this.getDigit(attackHp);
 
 		if (defendUnit.movementType !== this.getDictionaryIndex("movementType", "flying")) {
 			defence += parseInt(this.state.defendLandscape);
@@ -275,7 +275,7 @@ class DamageTable extends Component {
 
 		//attack = attack * (120 - defence * this.getDigit(defendHp)) / 100;
 		var digit = this.getDigit(defendHp);
-		var defenceCoef = (1.2 - Math.min(1, defence / 15)) * (1.527 - Math.sqrt(digit) / 6 * (1 + defendUnit.defenceHpScale / 100) - defendUnit.defenceHpStart / 1000);
+		var defenceCoef = (1.2 - Math.min(1, defence / 15)) * (1.527 - Math.sqrt(digit) / 6);
 		attack = attack * defenceCoef;
 
 		return  parseInt(attack);
