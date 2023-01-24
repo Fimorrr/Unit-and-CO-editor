@@ -379,6 +379,62 @@ class App extends Component {
     CodeGenerator(this.state.options.unitProperties);
   }
 
+  getCalculatedStats = (stats) => {
+    let calculatedStats = {};
+
+    for(let key in stats) {
+      for(let i=0; i<stats[key].length; i++) {
+        let properties = stats[key][i].unitProperties;
+        for(let property in properties) {
+          if (properties[property].hasValue) {
+            if (calculatedStats[property]) {
+              calculatedStats[property]++;
+            }
+            else {
+              calculatedStats[property] = 1;
+            }
+          }
+          else {
+            if (!calculatedStats[property]) {
+              calculatedStats[property] = 0;
+            }
+          }
+        }
+      }
+    }
+
+    return calculatedStats;
+  }
+
+  checkUpgradeStats = () => {
+    let league = this.state.upgrades.League;
+    let reich = this.state.upgrades.Reich;
+
+    let leagueStats = this.getCalculatedStats(league);
+    let reichStats = this.getCalculatedStats(reich);
+    let summStats = {};
+
+    for (let key in leagueStats) {
+      if (summStats[key]) {
+        summStats[key] += leagueStats[key];
+      }
+      else {
+        summStats[key] = leagueStats[key];
+      }
+    }
+
+    for (let key in reichStats) {
+      if (summStats[key]) {
+        summStats[key] += reichStats[key];
+      }
+      else {
+        summStats[key] = reichStats[key];
+      }
+    }
+
+    console.log(summStats);
+  }
+
   generateJson = () => {
     let exportObject = {
       units: [],
@@ -524,6 +580,7 @@ class App extends Component {
           />
         </div>
         <button onClick={this.generateClass}>Generate C# Class</button>
+        <button onClick={this.checkUpgradeStats}>Check Upgrade Stats</button>
         <button onClick={this.generateJson}>Download JSON</button>
         <DamageTable
           isJsonInit={this.state.isJsonInit}

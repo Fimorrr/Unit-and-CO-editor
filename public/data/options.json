@@ -453,6 +453,10 @@
 			"type": "int"
 		},
 		{
+			"name": "transportedDisease",
+			"type": "int"
+		},
+		{
 			"name": "moveRankBonus",
 			"type": "int"
 		},
@@ -495,6 +499,10 @@
 		{
 			"name": "canLoadTech",
 			"type": "bool"
+		},
+		{
+			"name": "destroyEnemyAmmo",
+			"type": "int"
 		}
 	],
 	"unitNames": [
