@@ -503,25 +503,33 @@
 		{
 			"name": "destroyEnemyAmmo",
 			"type": "int"
+		},
+		{
+			"name": "fullAmmoAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullAmmoDefenceBonus",
+			"type": "int"
 		}
 	],
 	"unitNames": [
 		"Infantry",
 		"Bazooka",
-		"Cavalry",
-		"Transport",
-		"Machine Gunner",
 		"Grenade Thrower",
+		"Machine Gunner",
+		"Cavalry",
 		"Armored car",
-		"Artillery",
 		"Tank",
+		"Artillery",
+		"Transport",
+		"Flak",
 		"Zeppelin",
 		"Warbird",
-		"Fighter",
 		"Bomber",
+		"Fighter",
 		"Gaunt",
 		"Thug",
-		"Flak",
 		"Obelisk",
 		"Immortal"
 	],

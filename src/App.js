@@ -290,6 +290,16 @@ class App extends Component {
     console.log(this.state);
   }
 
+  getUnitIndex = (unitName) => {
+    let {unitNames} = this.state.options;
+
+    for (let i=0; i<unitNames.length; i++) {
+      if (unitNames[i] === unitName) {
+        return i;
+      }
+    }
+  }
+
   addUpgradeItem = (rowNumber) => {
     let {currentUnitName, currentFractionName} = this.state;
 
@@ -297,6 +307,7 @@ class App extends Component {
       Math.max(prev, curr.itemID)
     ), -1);
 
+    let unitIndex = this.getUnitIndex(currentUnitName) * 6 + itemID;
     let upgradeUnitProperies = {};
 
     this.state.options.unitProperties.forEach((unitProperty) => {
@@ -320,7 +331,7 @@ class App extends Component {
               rowNumber: rowNumber,
               itemID: itemID,
               itemName: "item",
-              icon: 0,
+              icon: unitIndex,
               price: 1,
               selected: false,
               unitProperties: upgradeUnitProperies
