@@ -444,6 +444,14 @@ class App extends Component {
     }
 
     console.log(summStats);
+
+    let {unitProperties} = this.state.options;
+
+    for (let i=0; i<unitProperties.length; i++) {
+      if (summStats[unitProperties[i].name] != null && summStats[unitProperties[i].name] == 0) {
+        console.log(unitProperties[i].name);
+      }
+    }
   }
 
   generateJson = () => {
