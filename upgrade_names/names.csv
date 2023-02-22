@@ -1,0 +1,97 @@
+Апгрейд,Ru,Eng
+LeagueInfantry0,Разоружение,Payment to the Lord
+LeagueInfantry1,Групповая оборона,Perseverance
+LeagueInfantry2,Ответный огонь,Fortitude
+LeagueInfantry3,Марш-бросок,No Respite
+LeagueInfantry4,Титановая броня,Battleforged
+LeagueInfantry5,Разрывные пули,No Mercy
+LeagueBazooka0,Штурмовое снаряжение,Assault Gear
+LeagueBazooka1,Осадное снаряжение,Siege Gear
+LeagueBazooka2,Уничтожитель дизелей,Destroyer of Diesels
+LeagueBazooka3,Ленд-лиз,Lend-Lease
+LeagueBazooka4,Облегченное вооружение,Light Cannons
+LeagueBazooka5,Мобильность,Battleforged
+LeagueGrenade Thrower0,Разрывные снаряды,No Mercy
+LeagueGrenade Thrower1,Бронебойные снаряды,Superheavy
+LeagueGrenade Thrower2,Закаленный в бою,Inevitability
+LeagueGrenade Thrower3,Подготовка,Preparation
+LeagueGrenade Thrower4,Эксперт по баллистике,Osprey Launcher
+LeagueGrenade Thrower5,Ответный огонь,Harpy Launcher
+LeagueMachine Gunner0,Царь горы,Iron Hail
+LeagueMachine Gunner1,Лесник,Sky Watcher
+LeagueMachine Gunner2,Охотник за головами,Bounty hunter
+LeagueMachine Gunner3,Боевой дух,Imbued Weapons
+LeagueMachine Gunner4,Мобильность,Sparrow Machinegun
+LeagueMachine Gunner5,Тяжелое вооружение,Stymphalean Machinegun
+LeagueCavalry0,Бронебойные снаряды,No Mercy
+LeagueCavalry1,Набег,No Respite
+LeagueCavalry2,Присвоение имущества,Requisition Company
+LeagueCavalry3,Тактический опыт,Speed of Pain
+LeagueCavalry4,Боевая практика,Long Barrels
+LeagueCavalry5,Спринт,On the Edge
+LeagueArmored car0,Улучшенные автоматы,Strix Machinegun
+LeagueArmored car1,Улучшенная пушка,Aquila Cannons
+LeagueArmored car2,Сдерживание натиска,Battlecharge
+LeagueArmored car3,Боевой дух,Chivalry
+LeagueArmored car4,Повелитель дорог,King of the Road
+LeagueArmored car5,Превосходство дизелей,Marauders Go Away
+LeagueTransport0,Огневая поддержка,Light Support
+LeagueTransport1,Увеличенный кузов,Conductor of War
+LeagueTransport2,Улучшенная проходимость,Reinforced Tires
+LeagueTransport3,Мобильный щит,Divine Aura
+LeagueTransport4,Непробиваемая обшивка,Shield of God
+LeagueTransport5,Защитный барьер,Bless Bearer
+LeagueZeppelin0,Десантное обеспечение,Powerful Unload
+LeagueZeppelin1,Быстрая выгрузка,Fast Unload
+LeagueZeppelin2,Повышенная грузоподъемность,Heavy Delivery
+LeagueZeppelin3,Увеличенный фюзеляж,Conductor of War
+LeagueZeppelin4,Непробиваемая обшивка,Shield of God
+LeagueZeppelin5,Мобильный щит,Divine Aura
+ReichInfantry0,Надежная позиция,Fortified
+ReichInfantry1,Закаленный в бою,Don't Stop
+ReichInfantry2,Адаптация,Shocktroop
+ReichInfantry3,Боевая медицина,Chronosynthesis
+ReichInfantry4,Подкрепление,Reinforcement
+ReichInfantry5,Перегруппировка,Trenchforged
+ReichBazooka0,Надежная позиция,Fortified
+ReichBazooka1,Тактическое укрытие,Vanguard
+ReichBazooka2,Кража,Kill Frenzy
+ReichBazooka3,Выборочное прицеливание,Slayer
+ReichBazooka4,Ответный огонь,Warrior Pride
+ReichBazooka5,Мобильность,Battleforged
+ReichGrenade Thrower0,Разрывные снаряды,No Mercy
+ReichGrenade Thrower1,Бронебойные снаряды,Doomstrike Bombs
+ReichGrenade Thrower2,Фугасные снаряды,Hellhound Bombs
+ReichGrenade Thrower3,Царь горы,Doomlord Mortars
+ReichGrenade Thrower4,Эксперт по баллистике,Ballistics Expert
+ReichGrenade Thrower5,Мобильность,On the Run
+ReichMachine Gunner0,Улучшенное наведение,Witch Hunter
+ReichMachine Gunner1,Стремительное наступление,High Castle
+ReichMachine Gunner2,Военврач,Pillager
+ReichMachine Gunner3,Охотник за головами,Bounty hunter
+ReichMachine Gunner4,Воздушная оборона,Gunslinger
+ReichMachine Gunner5,Оценка угрозы,Into the Fray
+ReichCavalry0,Выгодная позиция,Ghost Riders
+ReichCavalry1,Маневрирование,Pillager
+ReichCavalry2,Тактический опыт,Speed of Pain
+ReichCavalry3,Присвоение имущества,Requisition Company
+ReichCavalry4,Боевая практика,Gunslinger
+ReichCavalry5,Спринт,Hellion
+ReichArmored car0,Мародерство,Death Drain
+ReichArmored car1,Сбор обломков,Ghost Riders
+ReichArmored car2,Берсерк,Battle Wrath
+ReichArmored car3,Ремкомплект,Economy
+ReichArmored car4,Боевая готовность,Into the Fray
+ReichArmored car5,Катапультирование,Galvanization
+ReichTransport0,Самовосстановление,Chronosynthesis
+ReichTransport1,Увеличенный кузов,Conductor of War
+ReichTransport2,Катапультирование,Ejection
+ReichTransport3,Скорая помощь,Combat Medic
+ReichTransport4,Взаимозаменяемость,Design Compatibility
+ReichTransport5,Прямая поддержка,Field Resurrection
+ReichZeppelin0,Десантное обеспечение,Powerful Unload
+ReichZeppelin1,Быстрая выгрузка,Fast Unload
+ReichZeppelin2,Повышенная грузоподъемность,Heavy Delivery
+ReichZeppelin3,Увеличенный фюзеляж,Conductor of War
+ReichZeppelin4,Взаимозаменяемость,Design Compatibility
+ReichZeppelin5,Под огнем,Under Fire

@@ -491,6 +491,30 @@ class App extends Component {
     this.downloadObjectAsJson(exportObject, "unitProperties");
   }
 
+  generateNames = () => {
+    let upgradeList = this.state.upgrades;
+    let upgradeNames = {};
+    let outputString = "";
+
+    for (let upgradeName in upgradeList) {
+      for(let unitName in upgradeList[upgradeName]) {
+        let unitUpgrades = upgradeList[upgradeName][unitName];
+
+        if (unitUpgrades.length > 0) {
+          let key = upgradeName + unitName;
+          
+          for (let i=0; i<unitUpgrades.length; i++) {
+            upgradeNames[key + unitUpgrades[i].itemID] = unitUpgrades[i].itemName;
+            outputString += key + unitUpgrades[i].itemID + ";" + unitUpgrades[i].itemName + ";\n";
+          } 
+        }
+      }
+    }
+
+    console.log(outputString);
+    console.log(upgradeNames);
+  }
+
   downloadObjectAsJson = (exportObj, exportName) => {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
     var downloadAnchorNode = document.createElement('a');
@@ -600,6 +624,7 @@ class App extends Component {
         </div>
         <button onClick={this.generateClass}>Generate C# Class</button>
         <button onClick={this.checkUpgradeStats}>Check Upgrade Stats</button>
+        <button onClick={this.generateNames}>Generate Names</button>
         <button onClick={this.generateJson}>Download JSON</button>
         <DamageTable
           isJsonInit={this.state.isJsonInit}
