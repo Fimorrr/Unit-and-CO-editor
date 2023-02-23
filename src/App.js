@@ -20,7 +20,6 @@ class App extends Component {
         dictionaries: {}
       },
       units: {},
-      power: {},
       upgrades: {},
       currentUnitName: "Infantry",
       currentCOName: "Origin",
@@ -63,10 +62,6 @@ class App extends Component {
         units: {
           ...this.state.units,
           [coName]: {}
-        },
-        power: {
-          ...this.state.power,
-          [coName]: {}
         }
       }));
     });
@@ -82,16 +77,6 @@ class App extends Component {
                 [unitName]: {
                   ...this.state.units[coName][unitName],
                   [unitProperty.name]: this.getInitUnitObject(data, "units", coName, unitName, unitProperty)
-                }
-              }
-            },
-            power: {
-              ...this.state.power,
-              [coName]: {
-                ...this.state.power[coName],
-                [unitName]: {
-                  ...this.state.power[coName][unitName],
-                  [unitProperty.name]: this.getInitUnitObject(data, "power", coName, unitName, unitProperty)
                 }
               }
             }
@@ -457,7 +442,6 @@ class App extends Component {
   generateJson = () => {
     let exportObject = {
       units: [],
-      power: [],
       upgrades: []
     };
 
@@ -469,11 +453,6 @@ class App extends Component {
           "coName": coName,
           "unitName": unitName,
           "stats": this.state.units[coName][unitName]
-        });
-        exportObject.power.push({
-          "coName": coName,
-          "unitName": unitName,
-          "stats": this.state.power[coName][unitName]
         });
       });
     });
@@ -612,7 +591,6 @@ class App extends Component {
             coName={this.state.currentCOName}
             properties={this.state.options.unitProperties}
             units={this.state.units[this.state.currentCOName]}
-            power={this.state.power[this.state.currentCOName]}
             dictionaries={this.state.options.dictionaries}
             originUnits={this.state.units["Origin"]}
             changeCurrentName={this.changeCurrentName}
