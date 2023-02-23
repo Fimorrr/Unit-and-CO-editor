@@ -64,17 +64,7 @@ function CodeGenerator(unitProperties) {
             var localizedProperty = getLocalizedText(property);
             string formattedValue = value.value.ToString();
 
-            if (value.value >= 0)
-            {
-                formattedValue = "+" + formattedValue;
-            }
-
-            if (property.ToLower().IndexOf("bonus") != -1)
-            {
-                formattedValue = formattedValue + "%";
-            }
-
-            list.Add(localizedProperty + ": " + formattedValue);
+            list.Add(localizedProperty.Replace("{0}", formattedValue));
         }
     }
 
@@ -83,7 +73,8 @@ function CodeGenerator(unitProperties) {
         if (value.hasValue)
         {
             var localizedProperty = getLocalizedText(property);
-            list.Add(localizedProperty + ": " + value.value);
+            var localizedValue = LeanLocalization.GetTranslationText(value.value);
+            list.Add(localizedProperty.Replace("{0}", localizedValue));
         }
     }
 
@@ -92,7 +83,13 @@ function CodeGenerator(unitProperties) {
         if (value.hasValue)
         {
             var localizedProperty = getLocalizedText(property);
-            list.Add(localizedProperty + ": " + (value.value ? "Yes" : "No"));
+            
+            if (!value.value)
+            {
+                localizedProperty = LeanLocalization.GetTranslationText("nowDoesntWork") + ": " + localizedProperty;
+            }
+
+            list.Add(localizedProperty);
         }
     }
 

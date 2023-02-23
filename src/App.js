@@ -496,18 +496,15 @@ class App extends Component {
     let upgradeNames = {};
     let outputString = "";
 
-    for (let upgradeName in upgradeList) {
-      for(let unitName in upgradeList[upgradeName]) {
-        let unitUpgrades = upgradeList[upgradeName][unitName];
+    for (let fractionName in upgradeList) {
+      for(let unitName in upgradeList[fractionName]) {
+        let unitUpgrades = upgradeList[fractionName][unitName];
 
-        if (unitUpgrades.length > 0) {
-          let key = upgradeName + unitName;
-          
-          for (let i=0; i<unitUpgrades.length; i++) {
-            upgradeNames[key + unitUpgrades[i].itemID] = unitUpgrades[i].itemName;
-            outputString += key + unitUpgrades[i].itemID + ";" + unitUpgrades[i].itemName + ";\n";
-          } 
-        }
+        for (let i=0; i<unitUpgrades.length; i++) {
+          let key = fractionName.charAt(0) + "upgrade" + unitUpgrades[i].icon;
+          upgradeNames[key] = unitUpgrades[i].itemName;
+          outputString += key + ";" + unitUpgrades[i].itemName + ";\n";
+        } 
       }
     }
 
