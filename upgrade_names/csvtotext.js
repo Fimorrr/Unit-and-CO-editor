@@ -72,6 +72,7 @@ textArray.push(csvToText("upgrade_names/upg_description.csv"));
 textArray.push(csvToText("upgrade_names/missions.csv"));
 textArray.push(csvToText("upgrade_names/units.csv"));
 textArray.push(csvToText("upgrade_names/co_names.csv"));
+textArray.push(csvToText("upgrade_names/input.csv"));
 
 for (let key in textArray[0]) {
     let finalText = "";
