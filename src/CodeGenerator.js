@@ -47,12 +47,7 @@ function CodeGenerator(unitProperties) {
     text += "\n}\n";
     text += `string getLocalizedText(string property)
     {
-        var localizedProperty = LeanLocalization.GetTranslationText(property);
-
-        if (localizedProperty == null || localizedProperty == "")
-        {
-            localizedProperty = property;
-        }
+        var localizedProperty = LeanLocalization.GetTranslationText(property, property);
 
         return localizedProperty;
     }
@@ -64,7 +59,14 @@ function CodeGenerator(unitProperties) {
             var localizedProperty = getLocalizedText(property);
             string formattedValue = value.value.ToString();
 
-            list.Add(localizedProperty.Replace("{0}", formattedValue));
+            if (localizedProperty.Contains("{0}"))
+            {
+                list.Add(localizedProperty.Replace("{0}", formattedValue));
+            }
+            else
+            {
+                list.Add(localizedProperty + (value.value >= 0 ? " +" : " ") + value.value);
+            }
         }
     }
 
@@ -74,7 +76,10 @@ function CodeGenerator(unitProperties) {
         {
             var localizedProperty = getLocalizedText(property);
             var localizedValue = LeanLocalization.GetTranslationText(value.value);
-            list.Add(localizedProperty.Replace("{0}", localizedValue));
+            if (localizedProperty.Contains("{0}"))
+            {
+                list.Add(localizedProperty.Replace("{0}", localizedValue));
+            }
         }
     }
 
@@ -98,7 +103,8 @@ function CodeGenerator(unitProperties) {
         if (value.hasValue)
         {
             var localizedProperty = getLocalizedText(property);
-            list.Add(localizedProperty + " -> " + value.value);
+            var localizedValue = getLocalizedText(value.value.ToString());
+            list.Add(localizedProperty + " -> " + localizedValue);
         }
     }
 
@@ -107,7 +113,8 @@ function CodeGenerator(unitProperties) {
         if (value.hasValue)
         {
             var localizedProperty = getLocalizedText(property);
-            list.Add(localizedProperty + " -> " + value.value);
+            var localizedValue = getLocalizedText(value.value.ToString());
+            list.Add(localizedProperty + " -> " + localizedValue);
         }
     }
 }
