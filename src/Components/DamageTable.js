@@ -6,6 +6,7 @@ class DamageTable extends Component {
 		super(props);
 
 		this.state = {
+			showWeight: true,
 			attackCO: "Origin",
 			attackFraction: "League",
 			attackHp: 100,
@@ -27,6 +28,10 @@ class DamageTable extends Component {
 		let inputType = event.target.type;
 		let inputValue = event.target.value;
 		
+		if (inputType === "checkbox") {
+			inputValue = event.target.checked;
+		}
+
 		if (inputType === "number") {
 			inputValue = parseInt(inputValue);
 		}
@@ -89,12 +94,9 @@ class DamageTable extends Component {
 		return stats;
 	}
 
-	calculateDamage = (attackUnitName, defendUnitName, ammo, upgraded) => {
+	calculateDamage = (attackUnitName, defendUnitName, attackHp, defendHp, ammo, upgraded) => {
 		let attackUnit = this.getStats(this.state.attackCO, this.state.attackFraction, attackUnitName, upgraded);
 		let defendUnit = this.getStats(this.state.defendCO, this.state.defendFraction, defendUnitName, upgraded);
-
-		let attackHp = this.state.attackHp;
-		let defendHp = this.state.defendHp;
 
 		let defence = defendUnit.baseDefence;
 		
@@ -281,11 +283,84 @@ class DamageTable extends Component {
 		return  parseInt(attack);
 	}
 
+	getAttackArmorDurability = (attackUnit, defendUnit) => {
+		if (defendUnit.movementType == this.getDictionaryIndex("movementType", "flying") && attackUnit.isAntiAir) {
+			return 1500;
+		}
+		
+		if (attackUnit.uAttack > 0) {
+			return 500;
+		}
+
+		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "light") && attackUnit.lAttack > 0) {
+			return 500;
+		}
+
+		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "medium") && attackUnit.mAttack > 0) {
+			return 500;
+		}
+
+		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "heavy") && attackUnit.hAttack > 0) {
+			return 500;
+		}
+
+		if (attackUnit.lAttack > 0 || attackUnit.mAttack > 0 || attackUnit.hAttack > 0) {
+			return 270;
+		}
+
+		return 0;
+	}
+
+	getWeightOfAttack = (attackUnitName, defendUnitName, attackHp, defendHp) => {
+		let attackUnit = this.getStats(this.state.attackCO, this.state.attackFraction, attackUnitName, true);
+		let defendUnit = this.getStats(this.state.defendCO, this.state.defendFraction, defendUnitName, true);
+
+		let delta = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 1, true);
+
+		if (isNaN(delta)) {
+			return "-";
+		}
+
+		delta = Math.min(delta, defendHp);
+		let result = delta * defendUnit.price / 100;
+
+		if (delta > 0 && defendUnit.canCounterAttack && defendHp - delta > 0 && attackUnit.attackInnerRad == 0) {
+			let counterDelta = this.calculateDamage(defendUnitName, attackUnitName, defendHp - delta, attackHp, 1, true);
+
+			if (!isNaN(counterDelta)) {
+				counterDelta = Math.min(counterDelta, attackHp);
+				let counter = counterDelta * attackUnit.price / 100;
+
+				result -= counter;
+			}
+		}
+
+		if (delta / defendHp >= 0.14) {
+			result += this.getAttackArmorDurability(defendUnit, attackUnit);
+		}
+		//result -= this.getAttackArmorDurability(attackUnit, defendUnit) / 5 * 4;
+
+		return result;
+	}
+
 	getDamageText = (attackUnitName, defendUnitName) => {
-		let ammoDamage = this.calculateDamage(attackUnitName, defendUnitName, 1, false);
-		let ammoUpgradedDamage = this.calculateDamage(attackUnitName, defendUnitName, 1, true);
-		let noAmmoDamage = this.calculateDamage(attackUnitName, defendUnitName, 0, false);
-		let noAmmoUpgradedDamage = this.calculateDamage(attackUnitName, defendUnitName, 0, true);
+		let attackHp = this.state.attackHp;
+		let defendHp = this.state.defendHp;
+		
+		let ammoDamage = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 1, false);
+		let ammoUpgradedDamage = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 1, true);
+		let noAmmoDamage = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 0, false);
+		let noAmmoUpgradedDamage = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 0, true);
+
+		let weight = this.getWeightOfAttack(attackUnitName, defendUnitName, attackHp, defendHp);
+
+		if (this.state.showWeight) {
+			return (
+				<span>
+					{weight}
+				</span>
+			);
+		}
 
 		if (ammoUpgradedDamage !== noAmmoUpgradedDamage) {
 			return (
@@ -305,7 +380,7 @@ class DamageTable extends Component {
 		return (
 			<span
 				className={ammoDamage !== ammoUpgradedDamage ? "Upgrade-item-selected" : ""}>
-					{ammoUpgradedDamage}
+					{ammoUpgradedDamage }
 			</span>
 		);
 	}
@@ -319,6 +394,12 @@ class DamageTable extends Component {
 
 		return (
 			<div className="Damage-container">
+				<span>Show weight: </span>
+				<input 
+					className="Editor-input"
+					type="checkbox" 
+					checked={this.state.showWeight} 
+					onChange={(event) => this.changeProperty(event, "showWeight")}/>
 				<div className="Damage-container-options">
 					<div>
 						<div className="Editor-container">
