@@ -289,7 +289,7 @@ class DamageTable extends Component {
 		}
 		
 		if (attackUnit.uAttack > 0) {
-			return 500;
+			return 600;
 		}
 
 		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "light") && attackUnit.lAttack > 0) {
@@ -300,8 +300,13 @@ class DamageTable extends Component {
 			return 500;
 		}
 
-		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "heavy") && attackUnit.hAttack > 0) {
-			return 500;
+		if (defendUnit.armorType == this.getDictionaryIndex("armorType", "heavy")) {
+			if (attackUnit.hAttack > 0) {
+				return 500;
+			}
+			if (attackUnit.mAttack > 0) {
+				return 300;
+			}
 		}
 
 		if (attackUnit.lAttack > 0 || attackUnit.mAttack > 0 || attackUnit.hAttack > 0) {
