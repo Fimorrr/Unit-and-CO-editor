@@ -23,9 +23,13 @@ function splitCSV(csvRow) {
     let csvColumns = [];
     for (let j=1; j<rowDividers.length; j++) {
         let csvColumn = csvRow.substring(rowDividers[j-1] + 1, rowDividers[j]);
+        if (csvColumn.charCodeAt(csvColumn.length - 1) === 13) {
+            csvColumn = csvColumn.substring(0, csvColumn.length - 1);
+        }    
         if (csvColumn.charAt(0) === csvColumn.charAt(csvColumn.length - 1) && (csvColumn.charAt(0) === "'" || csvColumn.charAt(0) === '"')) {
             csvColumn = csvColumn.substring(1, csvColumn.length - 1);
         }
+
         csvColumns.push(csvColumn);
     }
 
