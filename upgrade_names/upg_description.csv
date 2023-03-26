@@ -120,8 +120,8 @@ rockOuterRadBonus,int,На горе имеет дополнительно {0} е
 attackNotFullHpEnemyBonus,int,При атаке врагов с неполным здоровьем получает {0}% к урону,Deals {0}% more damage against enemies with not full health,
 attackEnemyOnBuildingBonus,int,При атаке врагов в строениях получает {0}% к урону,Deals {0}% more damage against enemies in buildings,Добавить иконку активации
 unloadedMovementBonus,int,После выгрузки юнит получает дополнительно {0} ед передвижения,"After unloading, the unit gains {0} additional movement",
-unloadedAttackBonus,int,После выгрузки юнит получает {0}% к урону,Deals {0}% more damage after unloading,
-unloadedDefenceBonus,int,После выгрузки юнит получает на {0}% меньше урона,Takes {0}% less damage after unloading,
+unloadedAttackBonus,int,После выгрузки юнит получает {0}% к урону,Unit deals {0}% more damage after unloading,
+unloadedDefenceBonus,int,После выгрузки юнит получает на {0}% меньше урона,Unit takes {0}% less damage after unloading,
 canBorrowAmmoAlly,bool,"Если закончились боеприпасы, то берет их у ближайшего союзника","If out of ammo, takes it from the nearest ally",
 canLoadTech,bool,Может перевозить наземную технику,Can transport ground vehicles,
 destroyEnemyAmmo,int,После атаки уничтожает у врага {0} ед боеприпасов,Destroys {0} ammo points of the enemy after an attack,

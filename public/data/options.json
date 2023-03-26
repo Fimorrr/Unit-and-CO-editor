@@ -531,7 +531,9 @@
 		"Gaunt",
 		"Thug",
 		"Obelisk",
-		"Immortal"
+		"Immortal",
+		"Engineer",
+		"Road tank"
 	],
 	"coNames": [
 		"Origin"
@@ -546,7 +548,8 @@
 			"horse",
 			"wheel",
 			"flying",
-			"ship"
+			"ship",
+			"roadtires"
 		],
 		"armorType": [
 			"light",
