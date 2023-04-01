@@ -545,11 +545,12 @@
 	"dictionaries": {
 		"movementType": [
 			"boot",
-			"horse",
+			"track",
 			"wheel",
 			"flying",
 			"ship",
-			"roadtires"
+			"roadtires",
+			"hooves"
 		],
 		"armorType": [
 			"light",
