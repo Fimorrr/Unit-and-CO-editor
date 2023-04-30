@@ -181,6 +181,10 @@
 			"type": "string"
 		},
 		{
+			"name": "afterKillSpawnUnit",
+			"type": "string"
+		},
+		{
 			"name": "repairDiscount",
 			"type": "int"
 		},
@@ -533,7 +537,8 @@
 		"Obelisk",
 		"Immortal",
 		"Engineer",
-		"Road tank"
+		"Road tank",
+		"Destroyer"
 	],
 	"coNames": [
 		"Origin"

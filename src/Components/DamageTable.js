@@ -323,11 +323,15 @@ class DamageTable extends Component {
 		let delta = this.calculateDamage(attackUnitName, defendUnitName, attackHp, defendHp, 1, true);
 
 		if (isNaN(delta)) {
-			return "-";
+			return {
+				result: "-",
+				counter: "-"
+			};
 		}
 
 		delta = Math.min(delta, defendHp);
 		let result = delta * defendUnit.price / 100;
+		let resultCounter = 0;
 
 		if (delta > 0 && defendUnit.canCounterAttack && defendHp - delta > 0 && attackUnit.attackInnerRad == 0) {
 			let counterDelta = this.calculateDamage(defendUnitName, attackUnitName, defendHp - delta, attackHp, 1, true);
@@ -337,6 +341,7 @@ class DamageTable extends Component {
 				let counter = counterDelta * attackUnit.price / 100;
 
 				result -= counter;
+				resultCounter = counter;
 			}
 		}
 
@@ -345,7 +350,10 @@ class DamageTable extends Component {
 		}
 		//result -= this.getAttackArmorDurability(attackUnit, defendUnit) / 5 * 4;
 
-		return result;
+		return {
+			result: result,
+			counter: resultCounter
+		};
 	}
 
 	getDamageText = (attackUnitName, defendUnitName) => {
@@ -362,7 +370,12 @@ class DamageTable extends Component {
 		if (this.state.showWeight) {
 			return (
 				<span>
-					{weight}
+					<span>
+						{weight.result}
+					</span>
+					<span className={weight.result < weight.counter ? "Upgrade-item-selected" : ""}>
+						{" (" + weight.counter + ")"}
+					</span>
 				</span>
 			);
 		}
