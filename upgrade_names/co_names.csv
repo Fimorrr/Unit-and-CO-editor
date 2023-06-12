@@ -11,3 +11,15 @@ friedrich,Фридрих,Friedrich
 friedrich_description,,
 murdoch,Мёрдок,Murdoch
 murdoch_description,,
+copowername_capture,Быстрый захват,Fast Capture
+copowerdescription_capture,Увеличивает скорость захвата зданий на 50%,Increases building capture speed by 50%
+copowername_buildrun,Призыв к оружию,Call to Arms
+copowerdescription_buildrun,Юниты могут ходить сразу же после постройки,Units can move immediately after being built
+copowername_power1,Путь к славе,The Path of Glory
+copowerdescription_power1,Наземные юниты получают +1 к передвижению и +10% к атаке,Ground units get +1 movement and +10% attack
+copowername_power2,Крестовый поход,Divine Crusade
+copowerdescription_power2,Наземные юниты получают +2 к передвижению и +20% к атаке,Ground units get +2 movement and +20% attack
+copowername_heal,Темное восстановление,Dark Regeneration
+copowerdescription_heal,Восстанавливает 20 здоровья всем вашим юнитам,Restores 20 HP to all your Units
+copowername_disease,Теневой удар,Shadow Strike
+copowerdescription_disease,Все вражеские юниты теряют 20 здоровья,All enemy units lose 20 HP

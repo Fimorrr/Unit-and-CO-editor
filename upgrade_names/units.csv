@@ -5,7 +5,7 @@ Bazooka,Мародер,Marauder
 Cavalry,Конница,Cavalry
 Grenade Thrower,Бомбардир,Launcher
 Infantry,Стрелок,Rifleman
-Machine Gunner,Пулемет,Gunner
+Machine Gunner,Пулеметчик,Gunner
 Tank,Танк,Tank
 Transport,Грузовик,Truck
 Bomber,Бомбардировщик,Bomber
@@ -17,12 +17,23 @@ Thug,Вор,Thug
 Flak,Зенитная пушка,Flak
 Obelisk,Маяк,Beacon
 Immortal,Бессмертный,Immortal
+Engineer,Инженер,Engineer
+Road tank,Дорожный танк,Road Tank
+Destroyer,Уничтожитель,Destroyer
 Armored car Description,"Базовый дизельный юнит. Высокая мобильность, хорошая защита. Умеренная цена позволяет массовое использование.","Basic diesel unit. High mobility, good defense. Moderate price allows for mass usage."
 Artillery Description,Главный юнит артиллерийской поддержки. Высокая мощность позволяет подавлять даже самые бронированные цели. Не может атаковать и двигаться в один и тот же ход.,Main artillery support unit. High power allows to suppress even the most armored targets. Cannot attack and move in the same turn.
-Bazooka Description,"Пехотный юнит - эффективен против техники. Оснащен тяжелыми бронебойными пушками, что негативно сказывается на мобильности отряда.","Infantry unit - effective against diesels. Equipped with heavy anti-tank guns, which negatively affects squad mobility."
+Bazooka Description,"Пехотный юнит. Эффективен против техники. Оснащен тяжелыми бронебойными пушками, что негативно сказывается на мобильности отряда.","Infantry unit. Effective against diesels. Equipped with heavy anti-tank guns, which negatively affects squad mobility."
 Cavalry Description,"Наиболее мобильный пехотный юнит, эффективный в разведке и захвате зданий. Не рекомендуется в качестве основной ударной силы.","The most mobile infantry unit, effective in reconnaissance and building capture. Not recommended as the main striking force."
-Grenade Thrower Description,Легкий юнит артиллерийской поддержки. Не может атаковать и двигаться в один и тот же ход. Эффективен в связке с другими отрядами.,Light artillery support unit. Cannot attack and move in the same turn. Requires cooperation with other units.
+Grenade Thrower Description,Пехотный юнит артиллерийской поддержки. Не может атаковать и двигаться в один и тот же ход. Эффективен в связке с другими отрядами.,Artillery support infantry unit. Cannot attack and move in the same turn. Requires cooperation with other units.
 Infantry Description,Базовый пехотный юнит. Низкая цена и высокая мобильность делают его ключевым в захвате зданий и контроле территорий. Эффективен против пехоты.,Basic infantry unit. Low price and high mobility make it key in building capture and territory control. Effective against infantry.
-Machine Gunner Description,"Пехотный юнит, оснащенный мощным противопехотным и противовоздушным вооружением. Низкая эффективность против брони.",Infantry unit equipped with powerful anti-personnel and anti-air weapons. Low effectiveness against armor.
+Machine Gunner Description,"Пехотный юнит, оснащенный мощным противопехотным и противовоздушным вооружением. Низкая эффективность против наземных дизелей.",Infantry unit equipped with powerful anti-personnel and anti-air weapons. Low effectiveness against ground diesels.
 Tank Description,"Дизельный юнит наибольшей мощности. Крайне высокая мощность оружия, защита и цена. Уязвим для артиллерии. Эффективен против любых наземных целей.","Diesel unit with the highest power. Extremely high weapon power, defense and cost. Vulnerable to artillery. Effective against any ground targets."
 Transport Description,Вспомогательный дизельный юнит. Транспортирует пехоту. Выполняет снабжение боеприпасами. Высокая скорость на дороге. Вооружение отсутствует.,Auxiliary diesel unit. Transports infantry. Supplies ammunition. High speed on the road. No weapons.
+Bomber Description,"Летательный аппарат, его снаряды пробивают даже самую крепкую броню. Не может атаковать другие воздушные единицы.",
+Warbird Description,"Летательный аппарат, эффективен против пехоты и наземной техники.",
+Zeppelin Description,Вспомогательный летательный аппарат. Может перевозить пехоту и преодолевать любые препятствия по воздуху. Вооружение отсутствует.,
+Fighter Description,"Летательные аппарат, эффективен против других воздушных единиц. Наносит незначительный урон по наземным целям.",
+Flak Description,"Дизельный юнит. Эффективен против воздушных юнитов и пехоты, но уязвим к атакам других дизелей.",
+Road tank Description,"Тяжелый дизель. Эффективен против всех наземных единиц, но уязвим к атаке бомбардиров и артиллерии. Двигается только по дороге. Может перевозить до двух пехотных юнитов, при высадке юниты получают дополнительную броню и атаку. ",
+Engineer Description,Вспомогательный пехотный юнит. Может ремонтировать поврежденные наземные дизели. Имеет слабое легкое вооружение.,
+Destroyer Description,,
