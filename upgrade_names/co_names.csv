@@ -16,10 +16,10 @@ copowerdescription_capture,Увеличивает скорость захват�
 copowername_buildrun,Призыв к оружию,Call to Arms
 copowerdescription_buildrun,Юниты могут ходить сразу же после постройки,Units can move immediately after being built
 copowername_power1,Путь к славе,The Path of Glory
-copowerdescription_power1,Наземные юниты получают +1 к передвижению и +10% к атаке,Ground units get +1 movement and +10% attack
+copowerdescription_power1,Ваши наземные юниты получают +1 к передвижению и +10% к атаке,Ground units get +1 movement and +10% attack
 copowername_power2,Крестовый поход,Divine Crusade
-copowerdescription_power2,Наземные юниты получают +2 к передвижению и +20% к атаке,Ground units get +2 movement and +20% attack
+copowerdescription_power2,Ваши наземные юниты получают +2 к передвижению и +20% к атаке,Ground units get +2 movement and +20% attack
 copowername_heal,Темное восстановление,Dark Regeneration
 copowerdescription_heal,Восстанавливает 20 здоровья всем вашим юнитам,Restores 20 HP to all your Units
 copowername_disease,Теневой удар,Shadow Strike
-copowerdescription_disease,Все вражеские юниты теряют 20 здоровья,All enemy units lose 20 HP
+copowerdescription_disease,Все вражеские юниты теряют 15 здоровья,All enemy units lose 15 HP
