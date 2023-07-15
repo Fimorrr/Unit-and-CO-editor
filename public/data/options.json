@@ -515,6 +515,18 @@
 		{
 			"name": "fullAmmoDefenceBonus",
 			"type": "int"
+		},
+		{
+			"name": "antiAirDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "canMoveAfterMerge",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterMergeInfantry",
+			"type": "bool"
 		}
 	],
 	"unitNames": [

@@ -193,7 +193,7 @@ class DamageTable extends Component {
 			}
 
 			if (attackUnit.isAntiAir) {
-				divisionDefenceCoef = 1;
+				divisionDefenceCoef = 1 - defendUnit.antiAirDefenceBonus / 100;
 			}
 		}
 
