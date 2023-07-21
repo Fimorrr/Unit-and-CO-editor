@@ -535,6 +535,10 @@
 		{
 			"name": "canPromoteAfterCapture",
 			"type": "bool"
+		},
+		{
+			"name":"cantBeCounterattacked",
+			"type": "bool"
 		}
 	],
 	"unitNames": [
