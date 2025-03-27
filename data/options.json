@@ -1,0 +1,619 @@
+{
+	"unitProperties": [
+		{
+			"name": "vision",
+			"type": "int"
+		},
+		{
+			"name": "movement",
+			"type": "int"
+		},
+		{
+			"name": "movementType",
+			"type": "enum"
+		},
+		{
+			"name": "division",
+			"type": "enum"
+		},
+		{
+			"name": "buildBy",
+			"type": "enum"
+		},
+		{
+			"name": "baseDefence",
+			"type": "int"
+		},
+		{
+			"name": "armorType",
+			"type": "enum"
+		},
+		{
+			"name": "lAttack",
+			"type": "int"
+		},
+		{
+			"name": "mAttack",
+			"type": "int"
+		},
+		{
+			"name": "hAttack",
+			"type": "int"
+		},
+		{
+			"name": "uAttack",
+			"type": "int"
+		},
+		{
+			"name": "ammo",
+			"type": "int"
+		},
+		{
+			"name":"attackInnerRad",
+			"type": "int"
+		},
+		{
+			"name":"attackOuterRad",
+			"type": "int"
+		},
+		{
+			"name":"price",
+			"type": "int"
+		},
+		{
+			"name":"buildPriority",
+			"type": "int"
+		},
+		{
+			"name":"loadCapacity",
+			"type": "int"
+		},
+		{
+			"name":"bounty",
+			"type": "int"
+		},
+		{
+			"name":"canBeDetected",
+			"type": "bool"
+		},
+		{
+			"name":"canCapture",
+			"type": "bool"
+		},
+		{
+			"name":"canRankUp",
+			"type": "bool"
+		},
+		{
+			"name":"canMoveAfterBuild",
+			"type": "bool"
+		},
+		{
+			"name":"canAttackAfterMove",
+			"type": "bool"
+		},
+		{
+			"name":"canCounterAttack",
+			"type": "bool"
+		},
+		{
+			"name": "canAttackFly",
+			"type": "bool"
+		},
+		{
+			"name": "canAttackHighAir",
+			"type": "bool"
+		},
+		{
+			"name": "isHighAir",
+			"type": "bool"
+		},
+		{
+			"name": "isAntiAir",
+			"type": "bool"
+		},
+		{
+			"name": "canInverseLoad",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterInverseLoad",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterUnload",
+			"type": "bool"
+		},
+		{
+			"name": "canMergeWithDivision",
+			"type": "bool"
+		},
+		{
+			"name": "infantryHeal",
+			"type": "int"
+		},
+		{
+			"name": "techHeal",
+			"type": "int"
+		},
+		{
+			"name": "shipHeal",
+			"type": "int"
+		},
+		{
+			"name": "planeHeal",
+			"type": "int"
+		},
+		{
+			"name": "monsterHeal",
+			"type": "int"
+		},
+		{
+			"name": "vampireHeal",
+			"type": "int"
+		},
+		{
+			"name": "mergeHeal",
+			"type": "int"
+		},
+		{
+			"name": "killBounty",
+			"type": "int"
+		},
+		{
+			"name": "captureBounty",
+			"type": "int"
+		},
+		{
+			"name": "supplyHeal",
+			"type": "int"
+		},
+		{
+			"name": "endTurnHeal",
+			"type": "int"
+		},
+		{
+			"name": "endTurnDisease",
+			"type": "int"
+		},
+		{
+			"name": "afterDeathSpawnUnit",
+			"type": "string"
+		},
+		{
+			"name": "afterKillSpawnUnit",
+			"type": "string"
+		},
+		{
+			"name": "repairDiscount",
+			"type": "int"
+		},
+		{
+			"name": "repairBonus",
+			"type": "int"
+		},
+		{
+			"name": "captureProgressBonus",
+			"type": "int"
+		},
+		{
+			"name": "allySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "allySupportDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "enemySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "enemySupportDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "bloodlustAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "bloodlustDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "roadAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "roadDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "woodAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "woodDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "overallAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "overallDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "infantryAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "infantryDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "techAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "techDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "shipAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "shipDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "planeAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "planeDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "monsterAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "monsterDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "passedCellsAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "passedCellsDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "ammoAfterKillBonus",
+			"type": "int"
+		},
+		{
+			"name": "passedCellsVampireBonus",
+			"type": "int"
+		},
+		{
+			"name": "counterAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "counterDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackCount",
+			"type": "int"
+		},
+		{
+			"name": "attackSeparateFromMove",
+			"type": "bool"
+		},
+		{
+			"name": "moveFullMovement",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterAttack",
+			"type": "bool"
+		},
+		{
+			"name": "refreshMoveAfterKill",
+			"type": "bool"
+		},
+		{
+			"name": "lastTurnMovedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedDefendBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnAttackedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnNotAttackedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "lastTurnNotAttackedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullHpAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullHpDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "hpOfSpawnUnit",
+			"type": "int"
+		},
+		{
+			"name": "maxDamageTaken",
+			"type": "int"
+		},
+		{
+			"name": "maxDamageGiven",
+			"type": "int"
+		},
+		{
+			"name": "baseDefenceIgnorePercent",
+			"type": "int"
+		},
+		{
+			"name": "landscapeDefenceIgnorePercent",
+			"type": "int"
+		},
+		{
+			"name": "singleAllySupportAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "singleAllySupportDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "buildingAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "buildingDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "ignoreRockDefence",
+			"type": "bool"
+		},
+		{
+			"name": "ignoreBuildingDefence",
+			"type": "bool"
+		},
+		{
+			"name": "isIndirect",
+			"type": "bool"
+		},
+		{
+			"name": "indirectAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "indirectDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackFirstAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackFirstDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "ignoreOverallDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "healAfterKillBonus",
+			"type": "int"
+		},
+		{
+			"name": "thisTurnSuppliedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "thisTurnSuppliedDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "afterDeathSpawnLoadedUnit",
+			"type": "bool"
+		},
+		{
+			"name": "transportedHeal",
+			"type": "int"
+		},
+		{
+			"name": "transportedDisease",
+			"type": "int"
+		},
+		{
+			"name": "moveRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "defenceRankBonus",
+			"type": "int"
+		},
+		{
+			"name": "rockOuterRadBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackNotFullHpEnemyBonus",
+			"type": "int"
+		},
+		{
+			"name": "attackEnemyOnBuildingBonus",
+			"type": "int"
+		},
+		{
+			"name": "unloadedMovementBonus",
+			"type": "int"
+		},
+		{
+			"name": "unloadedAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "unloadedDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "canBorrowAmmoAlly",
+			"type": "bool"
+		},
+		{
+			"name": "canLoadTech",
+			"type": "bool"
+		},
+		{
+			"name": "destroyEnemyAmmo",
+			"type": "int"
+		},
+		{
+			"name": "fullAmmoAttackBonus",
+			"type": "int"
+		},
+		{
+			"name": "fullAmmoDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "antiAirDefenceBonus",
+			"type": "int"
+		},
+		{
+			"name": "canMoveAfterMerge",
+			"type": "bool"
+		},
+		{
+			"name": "canMoveAfterMergeInfantry",
+			"type": "bool"
+		},
+		{
+			"name": "hasFirstRankAfterBuild",
+			"type": "bool"
+		},
+		{
+			"name": "canPromoteAfterCapture",
+			"type": "bool"
+		},
+		{
+			"name":"cantBeCounterattacked",
+			"type": "bool"
+		}
+	],
+	"unitNames": [
+		"Infantry",
+		"Bazooka",
+		"Grenade Thrower",
+		"Machine Gunner",
+		"Cavalry",
+		"Armored car",
+		"Tank",
+		"Artillery",
+		"Transport",
+		"Flak",
+		"Zeppelin",
+		"Warbird",
+		"Bomber",
+		"Fighter",
+		"Gaunt",
+		"Thug",
+		"Obelisk",
+		"Immortal",
+		"Engineer",
+		"Road tank",
+		"Destroyer"
+	],
+	"coNames": [
+		"Origin"
+	],
+	"fractionNames": [
+		"League",
+		"Reich"
+	],
+	"dictionaries": {
+		"movementType": [
+			"boot",
+			"track",
+			"wheel",
+			"flying",
+			"ship",
+			"roadtires",
+			"hooves"
+		],
+		"armorType": [
+			"light",
+			"medium",
+			"heavy"
+		],
+		"landscape": [
+			"road",
+			"plain",
+			"wood",
+			"city"
+		],
+		"division": [
+			"infantry",
+			"tech",
+			"ship",
+			"plane",
+			"monster",
+			"none"
+		],
+		"rank": [
+			"none",
+			"level1",
+			"level2",
+			"level3"
+		],
+		"buildBy" : [
+			"barracks",
+			"factory",
+			"scrapworks",
+			"airport",
+			"seaport",
+			"rift",
+			"none"
+		]
+	}
+}
