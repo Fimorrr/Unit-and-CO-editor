@@ -37,8 +37,8 @@ class Editor extends Component {
       return "";
     }
 
-    let unitImgSrc = "../resources/units/" + props.unitName + ".png";
-    let coImgSrc = "../resources/co/" + props.coName + ".png";
+    let unitImgSrc = "resources/units/" + props.unitName + ".png";
+    let coImgSrc = "resources/co/" + props.coName + ".png";
 
     let typeName = props.isPowerSelect ? "power" : "units";
 

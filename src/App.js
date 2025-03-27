@@ -29,14 +29,16 @@ class App extends Component {
       isJsonInit: false
     };
 
-    fetch('../data/options.json').then(response => {
+    const basePath = process.env.PUBLIC_URL || '';
+
+    fetch(`${basePath}/data/options.json`).then(response => {
       return response.json();
     }).then(data => {
       this.setState(() => ({
         options: data
       }));
 
-      fetch('../data/unitProperties.json').then(response => {
+      fetch(`${basePath}/data/unitProperties.json`).then(response => {
         return response.json();
       }).then(data => {
         this.initJson(data);

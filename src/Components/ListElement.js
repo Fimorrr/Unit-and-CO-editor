@@ -5,13 +5,13 @@ function ListElement(props) {
   let imgSrc = "";
 
   if (props.type === "unit") {
-    imgSrc = "../resources/units/" + props.name + ".png";
+    imgSrc = "resources/units/" + props.name + ".png";
   }
   else if (props.type === "co") {
-    imgSrc = "../resources/co/" + props.name + ".png";
+    imgSrc = "resources/co/" + props.name + ".png";
   }
   else if (props.type === "fraction") {
-    imgSrc = "../resources/fractions/" + props.name + ".png";
+    imgSrc = "resources/fractions/" + props.name + ".png";
   }
 
   return (

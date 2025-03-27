@@ -41,7 +41,7 @@ function UpgradeItem(props) {
 							height: "40px",
 							marginRight: "10px",
 							objectFit: "contain",
-							background: `url(../resources/icons/${iconImage}.png) ${-30 * (props.item.icon % 6)}px ${-30 * parseInt(props.item.icon / 6)}px / cover no-repeat`
+							background: `url(resources/icons/${iconImage}.png) ${-30 * (props.item.icon % 6)}px ${-30 * parseInt(props.item.icon / 6)}px / cover no-repeat`
 						}}
 					/>
 				</div>

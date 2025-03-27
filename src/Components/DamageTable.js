@@ -6,7 +6,7 @@ class DamageTable extends Component {
 		super(props);
 
 		this.state = {
-			showWeight: true,
+			showWeight: false,
 			attackCO: "Origin",
 			attackFraction: "League",
 			attackHp: 100,
@@ -577,7 +577,7 @@ class DamageTable extends Component {
 						<td/>
 						{unitNames.map((unitName) => (
 							<td>
-								<img src={"../resources/units/" + unitName + ".png"} width="30px" height="30px" />
+								<img src={"resources/units/" + unitName + ".png"} width="30px" height="30px" />
 							</td>
 						))}
 					</tr>
@@ -585,7 +585,7 @@ class DamageTable extends Component {
 						return (
 							<tr>
 								<td>
-									<img src={"../resources/units/" + defendUnitName + ".png"} width="30px" height="30px" />
+									<img src={"resources/units/" + defendUnitName + ".png"} width="30px" height="30px" />
 								</td>
 								{unitNames.map((attackUnitName) => (
 									<td>
