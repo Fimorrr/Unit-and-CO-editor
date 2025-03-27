@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Unit-and-CO-editor/static/css/main.b4ac4476.css",
-    "main.js": "/Unit-and-CO-editor/static/js/main.4180eb10.js",
+    "main.js": "/Unit-and-CO-editor/static/js/main.98b7e5de.js",
     "index.html": "/Unit-and-CO-editor/index.html",
     "main.b4ac4476.css.map": "/Unit-and-CO-editor/static/css/main.b4ac4476.css.map",
-    "main.4180eb10.js.map": "/Unit-and-CO-editor/static/js/main.4180eb10.js.map"
+    "main.98b7e5de.js.map": "/Unit-and-CO-editor/static/js/main.98b7e5de.js.map"
   },
   "entrypoints": [
     "static/css/main.b4ac4476.css",
-    "static/js/main.4180eb10.js"
+    "static/js/main.98b7e5de.js"
   ]
 }
